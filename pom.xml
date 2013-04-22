@@ -65,6 +65,18 @@
       <groupId>org.jboss.ws.cxf</groupId>
       <artifactId>jbossws-cxf-server</artifactId>
       <version>${jbossws.cxf.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.apache.ws.security</groupId>
+            <artifactId>wss4j</artifactId>
+          </exclusion>
+        </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.ws.security</groupId>
+      <artifactId>wss4j</artifactId>
+      <version>1.6.11-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -590,6 +602,7 @@
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
                  <!--this broke the WSI-Analyzer-->
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase</exclude>
               </excludes>
             </configuration>
           </plugin>
@@ -622,7 +635,8 @@
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
                  <!--this broke the WSI-Analyzer-->
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/oasis/*TestCase*</exclude>
+                 <!--this broke the alogrithm conformance in wsi-bsp-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
               </excludes>
             </configuration>
           </plugin>
