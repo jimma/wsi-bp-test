@@ -1,0 +1,127 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <name>JBoss Web Services -WSI-BP20 Test</name>
+  <artifactId>wsi-bp20-tests</artifactId>
+  <packaging>jar</packaging>
+  
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss.ws.cxf</groupId>
+    <artifactId>wsi-bp-testsuite</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent> 
+
+  <!-- Profiles -->
+  <profiles>
+    <!-- 
+    Name:  noprepare
+    Descr: Skip test preparation with -Dnoprepare  
+    -->
+    <profile>
+      <id>noprepare</id>
+      <activation>
+        <property>
+          <name>!noprepare</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+
+          <plugin> <!-- This copies jbossws-cxf-factories jar to endorsed dir before the integration-tests are run -->
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-factories-jar</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/../../endorsed/target/</directory>
+                      <includes>
+                        <include>jbossws-cxf-factories-${jbossws.cxf.version}.jar</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+
+              <!--workaround to copy the utf-16 encoding wsdl-->
+              <execution>
+                <id>copy-utf16-wsdl</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <encoding>UTF-16</encoding>
+                  <overwrite>true</overwrite>  
+                  <outputDirectory>${project.build.directory}/test-resources/jaxws/bp12/basedoc-utf16/WEB-INF/wsdl</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/src/test/resources/jaxws/bp12/basedoc-utf16/WEB-INF/wsdl</directory>
+                      <includes>
+                        <include>*.wsdl</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+
+
+              <!--workaround to copy the utf-16 encoding wsdl-->
+              <execution>
+                <id>copy-utf16-wsdl2</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <encoding>UTF-16</encoding>
+                  <overwrite>true</overwrite>  
+                  <outputDirectory>${project.build.directory}/test-resources/jaxws/bp12/mtom-utf16/WEB-INF/wsdl</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/src/test/resources/jaxws/bp12/mtom-utf16/WEB-INF/wsdl</directory>
+                      <includes>
+                        <include>*.wsdl</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>build-jars</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <property name="tests.output.dir" value="${project.build.directory}"/>
+                    <property name="tests.resources.dir" value="${basedir}/src/test/resources"/>
+                    <ant antfile="scripts/cxf-jars-jaxws.xml" target="build-jars-jaxws"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+  </profiles>
+  
+</project>

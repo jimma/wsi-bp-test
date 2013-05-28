@@ -1,0 +1,16 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+	<soap:Header>
+		<Action xmlns="http://www.w3.org/2005/08/addressing">http://example.org/wsaTestService/wsaTestPortType/echo1Request
+		</Action>
+		<MessageID xmlns="http://www.w3.org/2005/08/addressing" soap:mustUnderstand="1">urn:uuid:6388dfec-a8d3-47a3-ae8f-be5b643e5a60</MessageID>
+		<FaultTo xmlns="http://www.w3.org/2005/08/addressing">http://www.example.com/</FaultTo>
+		<To xmlns="http://www.w3.org/2005/08/addressing">http://localhost:$PORT/jaxws-bp12test1192/Test1192
+		</To>
+		<ReplyTo xmlns="http://www.w3.org/2005/08/addressing">
+			<Address>http://www.w3.org/2005/08/addressing/anonymous</Address>
+		</ReplyTo>
+	</soap:Header>
+	<soap:Body>
+		<echoIn1 xmlns="http://example.org/echo">input string</echoIn1>
+	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions targetNamespace="http://xmlsoap.org/Ping" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://xmlsoap.org/Ping" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://xmlsoap.org/Ping/Imports">
+      <xsd:import schemaLocation="Soap12MtomUtf80.xsd" namespace="http://xmlsoap.org/Ping"/>
+      <xsd:import schemaLocation="Soap12MtomUtf81.xsd" namespace="http://schemas.example.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="Soap12MtomUtf82.xsd" namespace="http://schemas.example.com/2003/10/Serialization/Arrays"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMtomExtendedContract_EchoBinaryAsString_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoBinaryAsString"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoBinaryAsString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoBinaryAsStringResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoStringAsBinary_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStringAsBinary"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoStringAsBinary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStringAsBinaryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoBinaryArrayAsStringArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoBinaryArrayAsStringArray"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoBinaryArrayAsStringArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoBinaryArrayAsStringArrayResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoBinaryFieldAsString_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoBinaryFieldAsString"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoBinaryFieldAsString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoBinaryFieldAsStringResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoStringArrayAsBinaryArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStringArrayAsBinaryArray"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoStringArrayAsBinaryArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStringArrayAsBinaryArrayResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoStringArrayAsBinaryFields_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStringArrayAsBinaryFields"/>
+  </wsdl:message>
+  <wsdl:message name="IMtomExtendedContract_EchoStringArrayAsBinaryFields_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStringArrayAsBinaryFieldsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EchoBinaryHeaderRequest">
+    <wsdl:part name="parameters" element="tns:EchoBinaryHeaderRequest" />
+  </wsdl:message>
+  <wsdl:message name="EchoBinaryHeaderRequest_Headers">
+    <wsdl:part name="HeaderData" element="tns:HeaderData" />
+  </wsdl:message>
+  <wsdl:message name="EchoBinaryHeaderResponse">
+    <wsdl:part name="parameters" element="tns:EchoBinaryHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoBinaryHeaderResponse_Headers">
+    <wsdl:part name="HeaderData" element="tns:HeaderData" />
+  </wsdl:message>
+  <wsdl:portType name="IMtomExtendedContract">
+    <wsdl:operation name="EchoBinaryAsString">
+      <wsdl:input wsam:Action="http://xmlsoap.org/EchoBinaryAsString" message="tns:IMtomExtendedContract_EchoBinaryAsString_InputMessage"/>
+      <wsdl:output wsam:Action="http://xmlsoap.org/EchoBinaryAsStringResponse" message="tns:IMtomExtendedContract_EchoBinaryAsString_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStringAsBinary">
+      <wsdl:input wsam:Action="http://xmlsoap.org/EchoStringAsBinary" message="tns:IMtomExtendedContract_EchoStringAsBinary_InputMessage"/>
+      <wsdl:output wsam:Action="http://xmlsoap.org/EchoStringAsBinaryResponse" message="tns:IMtomExtendedContract_EchoStringAsBinary_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EchoBinaryArrayAsStringArray">
+      <wsdl:input wsam:Action="http://xmlsoap.org/EchoBinaryArrayAsStringArray" message="tns:IMtomExtendedContract_EchoBinaryArrayAsStringArray_InputMessage"/>
+      <wsdl:output wsam:Action="http://xmlsoap.org/EchoBinaryArrayAsStringArrayResponse" message="tns:IMtomExtendedContract_EchoBinaryArrayAsStringArray_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EchoBinaryFieldAsString">
+      <wsdl:input wsam:Action="http://xmlsoap.org/EchoBinaryFieldAsString" message="tns:IMtomExtendedContract_EchoBinaryFieldAsString_InputMessage"/>
+      <wsdl:output wsam:Action="http://xmlsoap.org/EchoBinaryFieldAsStringResponse" message="tns:IMtomExtendedContract_EchoBinaryFieldAsString_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStringArrayAsBinaryArray">
+      <wsdl:input wsam:Action="http://xmlsoap.org/EchoStringArrayAsBinaryArray" message="tns:IMtomExtendedContract_EchoStringArrayAsBinaryArray_InputMessage"/>
+      <wsdl:output wsam:Action="http://xmlsoap.org/EchoStringArrayAsBinaryArrayReply" message="tns:IMtomExtendedContract_EchoStringArrayAsBinaryArray_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStringArrayAsBinaryFields">
+      <wsdl:input wsam:Action="http://xmlsoap.org/EchoStringArrayAsBinaryFields" message="tns:IMtomExtendedContract_EchoStringArrayAsBinaryFields_InputMessage"/>
+      <wsdl:output wsam:Action="http://xmlsoap.org/EchoStringArrayAsBinaryFieldsReply" message="tns:IMtomExtendedContract_EchoStringArrayAsBinaryFields_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="EchoBinaryHeader">
+      <wsdl:input wsam:Action="http://xmlsoap.org/HeaderRequest" name="EchoBinaryHeaderRequest" message="tns:EchoBinaryHeaderRequest" />
+      <wsdl:output wsam:Action="http://xmlsoap.org/HeaderResponse" name="EchoBinaryHeaderResponse" message="tns:EchoBinaryHeaderResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
