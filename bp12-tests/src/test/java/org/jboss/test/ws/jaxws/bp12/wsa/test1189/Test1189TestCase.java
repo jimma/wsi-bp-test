@@ -28,12 +28,13 @@ import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 
 import junit.framework.Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class Test1189TestCase extends JBossWSTest
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
+import org.jboss.wsf.test.JBossWSCXFTestSetup;
+
+public class Test1189TestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1189/Test1189";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1189/Test1189";
 
    public static Test suite()
    {
@@ -49,7 +50,7 @@ public class Test1189TestCase extends JBossWSTest
       WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://" + getServerHost() + ":9090/jaxws-bp12test1189/Test1189");
+    		  PROXY_ADDRESS +"/jaxws-bp12test1189/Test1189");
 
       System.out.println("Invoking echo...");
       String response = port.echo("input string");

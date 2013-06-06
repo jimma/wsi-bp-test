@@ -34,12 +34,12 @@ import javax.xml.ws.Service;
 
 import junit.framework.Test;
 
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class BaseTypesRPCTestCase extends JBossWSTest
+public class BaseTypesRPCTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12baserpc/BPBaseRPC";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20baserpc/BPBaseRPC";
 
    public static Test suite()
    {
@@ -54,7 +54,7 @@ public class BaseTypesRPCTestCase extends JBossWSTest
       Service service = Service.create(wsdlURL, serviceName);
       IBaseDataTypesRpcLit port = (IBaseDataTypesRpcLit) service.getPort(IBaseDataTypesRpcLit.class);
       // invoke method
-      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://localhost:9090/jaxws-bp12baserpc/BPBaseRPC");
+      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, PROXY_ADDRESS + "/jaxws-bp12baserpc/BPBaseRPC");
       System.out.println("Invoking retInt...");
       int _retInt_inInt = 10;
       int _retInt__return = port.retInt(_retInt_inInt);

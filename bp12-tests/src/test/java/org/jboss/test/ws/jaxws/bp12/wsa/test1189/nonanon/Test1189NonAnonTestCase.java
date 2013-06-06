@@ -30,12 +30,12 @@ import javax.xml.ws.soap.SOAPFaultException;
 
 import junit.framework.Test;
 
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class Test1189NonAnonTestCase extends JBossWSTest
+public class Test1189NonAnonTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1189-nonanon/Test1189NonAnon";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1189-nonanon/Test1189NonAnon";
 
    public static Test suite()
    {
@@ -51,7 +51,7 @@ public class Test1189NonAnonTestCase extends JBossWSTest
       WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://" + getServerHost() + ":9090/jaxws-bp12test1189-nonanon/Test1189NonAnon");
+            PROXY_ADDRESS + "/jaxws-bp12test1189-nonanon/Test1189NonAnon");
 
       try
       {

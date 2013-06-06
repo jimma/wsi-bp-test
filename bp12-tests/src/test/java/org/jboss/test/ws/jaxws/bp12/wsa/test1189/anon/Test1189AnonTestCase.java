@@ -35,10 +35,10 @@ import org.apache.cxf.ws.addressing.AttributedURIType;
 import org.apache.cxf.ws.addressing.EndpointReferenceType;
 import org.apache.cxf.ws.addressing.JAXWSAConstants;
 import org.apache.cxf.ws.addressing.impl.AddressingPropertiesImpl;
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class Test1189AnonTestCase extends JBossWSTest
+public class Test1189AnonTestCase extends BP12TestCase
 {
    private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1189-anon/Test1189Anon";
 
@@ -56,13 +56,13 @@ public class Test1189AnonTestCase extends JBossWSTest
       WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://" + getServerHost() + ":9090/jaxws-bp12test1189-anon/Test1189Anon");
+            PROXY_ADDRESS + "/jaxws-bp20test1189-anon/Test1189Anon");
       
       
       EndpointReferenceType wsaTo = new EndpointReferenceType();
       AddressingProperties addrProperties = new AddressingPropertiesImpl();
       AttributedURIType epr = new AttributedURIType();
-      epr.setValue( "http://" + getServerHost() + ":8080/jaxws-bp12test1189-anon/Test1189Anon");
+      epr.setValue( "http://" + getServerHost() + ":8080/jaxws-bp20test1189-anon/Test1189Anon");
       wsaTo.setAddress(epr);
       addrProperties.setReplyTo(wsaTo);
       ((BindingProvider) port).getRequestContext().put(JAXWSAConstants.CLIENT_ADDRESSING_PROPERTIES, addrProperties);
@@ -74,6 +74,7 @@ public class Test1189AnonTestCase extends JBossWSTest
       }
       catch (SOAPFaultException e)
       {
+    	 e.printStackTrace();
          assertTrue("only anonymous supported error message is expected", e.getMessage().contains("Found non-anonymous address but only anonymous supported"));
       }
  

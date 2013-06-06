@@ -29,12 +29,12 @@ import javax.xml.ws.Service;
 
 import junit.framework.Test;
 
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class Test1198TestCase extends JBossWSTest
+public class Test1198TestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1198/Test1198";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1198/Test1198";
 
    public static Test suite()
    {
@@ -50,7 +50,7 @@ public class Test1198TestCase extends JBossWSTest
       SignatureRpcLiteral port = (SignatureRpcLiteral) service.getPort(SignatureRpcLiteral.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://" + getServerHost() + ":9090/jaxws-bp12test1198/Test1198");
+            PROXY_ADDRESS + "/jaxws-bp12test1198/Test1198");
 
 
       //request 1      

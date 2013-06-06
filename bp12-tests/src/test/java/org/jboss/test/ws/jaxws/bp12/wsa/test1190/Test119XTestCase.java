@@ -41,12 +41,12 @@ import javax.xml.ws.soap.SOAPFaultException;
 import junit.framework.Test;
 
 import org.apache.cxf.helpers.IOUtils;
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class Test119XTestCase extends JBossWSTest
+public class Test119XTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1190/Test1190";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1190/Test1190";
 
    public static Test suite()
    {
@@ -62,7 +62,7 @@ public class Test119XTestCase extends JBossWSTest
       WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://localhost:9090/jaxws-bp12test1190/Test1190");
+    		  PROXY_ADDRESS +"/jaxws-bp12test1190/Test1190");
 
       System.out.println("Invoking echo1...");
       String response = port.echo1("input string");
@@ -87,7 +87,7 @@ public class Test119XTestCase extends JBossWSTest
             Service.Mode.MESSAGE,
             new AddressingFeature(false, false));
       ((BindingProvider) disp).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://" + getServerHost() + ":9090/jaxws-bp12test1190/Test1190");
+            PROXY_ADDRESS + "/jaxws-bp12test1190/Test1190");
       InputStream msgIns = getClass().getResourceAsStream("./wsa-without-messageid.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
       msg = msg.replaceAll("$PORT", "9090");
@@ -120,7 +120,7 @@ public class Test119XTestCase extends JBossWSTest
             Service.Mode.MESSAGE,
             new AddressingFeature(false, false));
       ((BindingProvider) disp).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://" + getServerHost() + ":9090/jaxws-bp12test1190/Test1192");
+    		  PROXY_ADDRESS +"/jaxws-bp12test1190/Test1192");
       //To mustunderstand
       InputStream msgIns = getClass().getResourceAsStream("./wsa-to-mustunderstand.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
@@ -212,7 +212,7 @@ public class Test119XTestCase extends JBossWSTest
    {
       //test1194-version mismatch  
       // construct proxy 
-      URL url = new URL("http://localhost:9090/jaxws-bp12test1190/Test1190");
+      URL url = new URL( PROXY_ADDRESS +"/jaxws-bp12test1190/Test1190");
       HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
       InputStream msgIns = getClass().getResourceAsStream("./wsa-version-mismatch.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
@@ -239,6 +239,7 @@ public class Test119XTestCase extends JBossWSTest
             buffer.append(inputLine);
 
          in.close();
+         System.out.println(buffer.toString());
          assertTrue("Expected version mismatch error", buffer.toString().contains("soap:VersionMismatch"));
 
       }

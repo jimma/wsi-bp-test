@@ -29,12 +29,12 @@ import javax.xml.ws.Service;
 
 import junit.framework.Test;
 
+import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
-import org.jboss.wsf.test.JBossWSTest;
 
-public class ComplexTypesDocTestCase extends JBossWSTest
+public class ComplexTypesDocTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12complexdoc/ComplexDoc";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20complexdoc/ComplexDoc";
 
    public static Test suite()
    {
@@ -50,7 +50,7 @@ public class ComplexTypesDocTestCase extends JBossWSTest
       IComplexDataTypesDocLitW port = (IComplexDataTypesDocLitW) service.getPort(IComplexDataTypesDocLitW.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            "http://localhost:9090/jaxws-bp12complexdoc/ComplexDoc");
+            PROXY_ADDRESS + "/jaxws-bp12complexdoc/ComplexDoc");
 
       System.out.println("Invoking retArrayString1D...");
       StringArray inArrayString1D = new StringArray();
