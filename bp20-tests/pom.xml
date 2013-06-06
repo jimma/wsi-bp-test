@@ -62,10 +62,10 @@
                 <configuration>
                   <encoding>UTF-16</encoding>
                   <overwrite>true</overwrite>  
-                  <outputDirectory>${project.build.directory}/test-resources/jaxws/bp12/basedoc-utf16/WEB-INF/wsdl</outputDirectory>
+                  <outputDirectory>${project.build.directory}/test-resources/jaxws/bp20/basedoc-utf16/WEB-INF/wsdl</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>${basedir}/src/test/resources/jaxws/bp12/basedoc-utf16/WEB-INF/wsdl</directory>
+                      <directory>${basedir}/src/test/resources/jaxws/bp20/basedoc-utf16/WEB-INF/wsdl</directory>
                       <includes>
                         <include>*.wsdl</include>
                       </includes>
@@ -85,10 +85,10 @@
                 <configuration>
                   <encoding>UTF-16</encoding>
                   <overwrite>true</overwrite>  
-                  <outputDirectory>${project.build.directory}/test-resources/jaxws/bp12/mtom-utf16/WEB-INF/wsdl</outputDirectory>
+                  <outputDirectory>${project.build.directory}/test-resources/jaxws/bp20/mtom-utf16/WEB-INF/wsdl</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>${basedir}/src/test/resources/jaxws/bp12/mtom-utf16/WEB-INF/wsdl</directory>
+                      <directory>${basedir}/src/test/resources/jaxws/bp20/mtom-utf16/WEB-INF/wsdl</directory>
                       <includes>
                         <include>*.wsdl</include>
                       </includes>
