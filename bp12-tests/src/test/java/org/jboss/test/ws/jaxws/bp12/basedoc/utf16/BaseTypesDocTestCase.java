@@ -39,7 +39,7 @@ import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
 public class BaseTypesDocTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20basedoc-utf16/BPBaseDoc";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12basedoc-utf16/BPBaseDoc";
 
    public static Test suite()
    {

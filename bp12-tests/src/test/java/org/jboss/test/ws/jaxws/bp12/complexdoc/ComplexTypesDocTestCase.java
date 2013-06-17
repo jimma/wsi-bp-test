@@ -34,7 +34,7 @@ import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
 public class ComplexTypesDocTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20complexdoc/ComplexDoc";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12complexdoc/ComplexDoc";
 
    public static Test suite()
    {

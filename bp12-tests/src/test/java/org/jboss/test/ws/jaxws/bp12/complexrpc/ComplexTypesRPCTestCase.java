@@ -34,7 +34,7 @@ import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
 public class ComplexTypesRPCTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20complexrpc/ComplexRPC";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12complexrpc/ComplexRPC";
 
    public static Test suite()
    {

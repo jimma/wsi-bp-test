@@ -35,7 +35,7 @@ import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
 public class Test1189NonAnonTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1189-nonanon/Test1189NonAnon";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1189-nonanon/Test1189NonAnon";
 
    public static Test suite()
    {

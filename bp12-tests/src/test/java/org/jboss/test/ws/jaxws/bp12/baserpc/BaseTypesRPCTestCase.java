@@ -39,7 +39,7 @@ import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
 public class BaseTypesRPCTestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20baserpc/BPBaseRPC";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12baserpc/BPBaseRPC";
 
    public static Test suite()
    {

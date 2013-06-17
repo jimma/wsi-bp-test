@@ -56,13 +56,13 @@ public class Test1189AnonTestCase extends BP12TestCase
       WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp20test1189-anon/Test1189Anon");
+            PROXY_ADDRESS + "/jaxws-bp12test1189-anon/Test1189Anon");
       
       
       EndpointReferenceType wsaTo = new EndpointReferenceType();
       AddressingProperties addrProperties = new AddressingPropertiesImpl();
       AttributedURIType epr = new AttributedURIType();
-      epr.setValue( "http://" + getServerHost() + ":8080/jaxws-bp20test1189-anon/Test1189Anon");
+      epr.setValue( "http://" + getServerHost() + ":8080/jaxws-bp12test1189-anon/Test1189Anon");
       wsaTo.setAddress(epr);
       addrProperties.setReplyTo(wsaTo);
       ((BindingProvider) port).getRequestContext().put(JAXWSAConstants.CLIENT_ADDRESSING_PROPERTIES, addrProperties);

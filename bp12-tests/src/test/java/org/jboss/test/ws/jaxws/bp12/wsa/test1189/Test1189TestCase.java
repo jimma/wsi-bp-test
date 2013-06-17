@@ -34,7 +34,7 @@ import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
 public class Test1189TestCase extends BP12TestCase
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1189/Test1189";
+   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1189/Test1189";
 
    public static Test suite()
    {
