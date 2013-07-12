@@ -30,8 +30,6 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 import javax.xml.ws.soap.Addressing;
 
-import org.jboss.test.ws.jaxws.bp12.basedoc.utf16.ObjectFactory;
-
 @WebService(targetNamespace = "http://tempuri.org/", name = "IBaseDataTypesDocLitW")
 @XmlSeeAlso({ObjectFactory.class})
 @Addressing
