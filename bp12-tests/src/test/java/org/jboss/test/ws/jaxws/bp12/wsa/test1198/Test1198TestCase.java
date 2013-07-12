@@ -31,6 +31,7 @@ import junit.framework.Test;
 
 import org.jboss.test.ws.jaxws.bp12.common.BP12Test;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
+import org.junit.Assert;
 
 public class Test1198TestCase extends BP12Test
 {
@@ -69,7 +70,8 @@ public class Test1198TestCase extends BP12Test
       System.out.println("Invoking sign2 and exception is expected...");
       try
       {
-         response = port.sign2("Fault","World");
+         port.sign2("Fault","World");
+         fail("Exception is expected.");
       }
       catch (Exception e)
       {

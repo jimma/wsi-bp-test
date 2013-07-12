@@ -71,8 +71,7 @@ public class TestServlet extends HttpServlet
          int testsRun = 0;
          if (methodName != null && methodName.length() > 0)
          {
-            Method m = null;
-            m = helper.getClass().getMethod(methodName);
+            Method m = helper.getClass().getMethod(methodName);
             testsRun++;
             invokeMethod(m, helper, failedTests, errorTests);
          }
