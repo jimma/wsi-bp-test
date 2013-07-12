@@ -23,7 +23,7 @@ package org.jboss.test.ws.jaxws.bp12.common;
 
 import org.jboss.wsf.test.JBossWSTest;
 
-public class BP12TestCase extends JBossWSTest{
+public class BP12Test extends JBossWSTest{
 	protected final String PROXY_ADDRESS = System.getProperty("proxy.address", "http://localhost:9090"); 
 
 }

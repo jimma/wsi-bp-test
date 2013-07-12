@@ -29,10 +29,10 @@ import javax.xml.ws.Service;
 
 import junit.framework.Test;
 
-import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
+import org.jboss.test.ws.jaxws.bp12.common.BP12Test;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
-public class ComplexTypesDocTestCase extends BP12TestCase
+public class ComplexTypesDocTestCase extends BP12Test
 {
    private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12complexdoc/ComplexDoc";
 

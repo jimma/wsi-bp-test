@@ -30,10 +30,10 @@ import javax.xml.ws.soap.SOAPFaultException;
 
 import junit.framework.Test;
 
-import org.jboss.test.ws.jaxws.bp12.common.BP12TestCase;
+import org.jboss.test.ws.jaxws.bp12.common.BP12Test;
 import org.jboss.wsf.test.JBossWSCXFTestSetup;
 
-public class Test1189NonAnonTestCase extends BP12TestCase
+public class Test1189NonAnonTestCase extends BP12Test
 {
    private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1189-nonanon/Test1189NonAnon";
 
