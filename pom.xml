@@ -242,7 +242,6 @@
             <configuration>
               <skip>false</skip>
               <includes>
-                <include>**/*Test.java</include>
                 <include>**/*TestCase.java</include>
               </includes>
               <parallel>classes</parallel>
