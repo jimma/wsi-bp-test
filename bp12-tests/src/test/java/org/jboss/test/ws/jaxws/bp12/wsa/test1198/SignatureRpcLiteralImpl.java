@@ -41,7 +41,7 @@ public class SignatureRpcLiteralImpl implements SignatureRpcLiteral
    {
       if (parameter1.equals("Fault"))
       {
-         new SignatureRpcLiteralSign2SignatureHeaderRpcFaultFaultMessage("Fault : " + parameter1 + "," + parameter2);
+         throw new SignatureRpcLiteralSign2SignatureHeaderRpcFaultFaultMessage("Fault : " + parameter1 + "," + parameter2);
       }
       return "Sign2, Parameter=" + parameter1 + ",Parameter=" + parameter2;
    }
