@@ -35,7 +35,7 @@
     <jboss712.version>7.1.2.Final</jboss712.version>
     <jboss713.version>7.1.3.Final</jboss713.version>
     <jboss720.version>7.2.0.Final</jboss720.version>
-    <jboss800.version>8.0.0.Alpha1-SNAPSHOT</jboss800.version>
+    <wildfly800.version>8.0.0.Beta1-SNAPSHOT</wildfly800.version>
 
     <ejb.api.version>1.0.1.Final</ejb.api.version>
     <jaxb.api.version>1.0.3.Final</jaxb.api.version>
@@ -502,6 +502,20 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
+              <excludes>
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
+                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
+                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
+                 <!--this broke the WSI-Analyzer-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+                 <!--this broke the alogrithm conformance in wsi-bsp-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+                 
+              </excludes>
             </configuration>
           </plugin>
         </plugins>
@@ -538,6 +552,20 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
+              <excludes>
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
+                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
+                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
+                 <!--this broke the WSI-Analyzer-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+                 <!--this broke the alogrithm conformance in wsi-bsp-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+                 
+              </excludes>
             </configuration>
           </plugin>
         </plugins>
@@ -567,6 +595,20 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
+              <excludes>
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
+                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
+                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
+                 <!--this broke the WSI-Analyzer-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+                 <!--this broke the alogrithm conformance in wsi-bsp-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+                 
+              </excludes>
             </configuration>
           </plugin>
         </plugins>
@@ -582,8 +624,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.jboss.as</groupId>
-          <artifactId>jboss-as-webservices-tests-integration</artifactId>
+          <groupId>org.wildlfy</groupId>
+          <artifactId>wildfly-webservices-server-integration</artifactId>
           <version>${jboss.version}</version>
         </dependency>
       </dependencies>
@@ -594,12 +636,18 @@
             <configuration>
               <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
               <excludes>
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
                  <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
+                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
                  <!--this broke the WSI-Analyzer-->
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
                  <!--this broke the alogrithm conformance in wsi-bsp-->
                  <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+                 
               </excludes>
             </configuration>
           </plugin>
@@ -642,6 +690,20 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
+              <excludes>
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
+                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+
+                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
+                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
+                 <!--this broke the WSI-Analyzer-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+                 <!--this broke the alogrithm conformance in wsi-bsp-->
+                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+                 
+              </excludes>
             </configuration>
           </plugin>
         </plugins>
