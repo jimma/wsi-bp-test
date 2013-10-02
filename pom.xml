@@ -100,13 +100,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${org.slf4j.version}</version>
-    </dependency>
-
-
-    <dependency>
       <groupId>org.picketlink</groupId>
       <artifactId>picketlink-core</artifactId>
       <version>${picketlink.version}</version>
@@ -781,6 +774,23 @@
         </dependency>
       </dependencies>
     </profile>
+
+    <profile>
+      <id>slf4j-log4j12</id>
+      <activation>
+        <property>
+          <name>!no-slf4j-log4j12</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>${org.slf4j.version}</version>
+        </dependency>
+      </dependencies>
+   </profile>
+
   </profiles>
 
 </project>
