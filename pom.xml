@@ -756,7 +756,31 @@
       </properties>
     </profile>
 
+    <profile>
+      <id>use-eap6-bom</id>
+      <properties>
+        <version.eap6-supported-artifacts>6.2.0.Beta1</version.eap6-supported-artifacts>
+      </properties>
 
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>org.jboss.bom</groupId>
+            <artifactId>eap6-supported-artifacts</artifactId>
+            <version>${version.eap6-supported-artifacts}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
+
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.ws.cxf</groupId>
+          <artifactId>jbossws-cxf-client</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
   </profiles>
 
 </project>
