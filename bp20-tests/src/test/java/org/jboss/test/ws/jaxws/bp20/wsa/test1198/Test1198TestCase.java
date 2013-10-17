@@ -69,7 +69,8 @@ public class Test1198TestCase extends BP20Test
       System.out.println("Invoking sign2 and exception is expected...");
       try
       {
-         response = port.sign2("Fault","World");
+         port.sign2("Fault","World");
+         fail("Exception is expected.");
       }
       catch (Exception e)
       {
