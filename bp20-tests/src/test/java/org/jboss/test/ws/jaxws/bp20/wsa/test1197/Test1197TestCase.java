@@ -92,7 +92,8 @@ public class Test1197TestCase extends BP20Test
       headerText.value = "Hello";
       try
       {
-         response = port.sign1("world");
+         port.sign7("World", headerText);
+         fail("Exception is expected.");
       }
       catch (Exception e)
       {
