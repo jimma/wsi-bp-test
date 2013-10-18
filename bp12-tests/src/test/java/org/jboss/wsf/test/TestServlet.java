@@ -51,10 +51,14 @@ public class TestServlet extends HttpServlet
    {
       String helperClassName = req.getParameter("helper");
       if (helperClassName == null || helperClassName.length() == 0)
+      {
          throw new ServletException("helper not specified!");
+      }
       String path = req.getParameter("path");
       if (path == null || path.length() == 0)
+      {
          throw new ServletException("path not specified!");
+      }
       try
       {
          ClientHelper helper = (ClientHelper) Class.forName(helperClassName).newInstance();
@@ -99,14 +103,18 @@ public class TestServlet extends HttpServlet
             {
                w.print(it.next());
                if (it.hasNext())
+               {
                   w.print(", ");
+               }
             }
             res.getWriter().print(" # Error tests: ");
             for (Iterator<String> it = errorTests.iterator(); it.hasNext();)
             {
                w.print(it.next());
                if (it.hasNext())
+               {
                   w.print(", ");
+               }
             }
          }
       }
