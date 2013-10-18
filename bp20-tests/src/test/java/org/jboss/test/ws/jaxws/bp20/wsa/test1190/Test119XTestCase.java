@@ -237,7 +237,9 @@ public class Test119XTestCase extends BP20Test
 
          StringBuffer buffer = new StringBuffer();
          while ((inputLine = in.readLine()) != null)
+         {
             buffer.append(inputLine);
+         }
 
          in.close();
          System.out.println(buffer.toString());
