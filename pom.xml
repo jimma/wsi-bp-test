@@ -29,7 +29,7 @@
     <jbossws.cxf.version>4.2.2-SNAPSHOT</jbossws.cxf.version>
     <jbossws.shared.testsuite.version>4.2.0-SNAPSHOT</jbossws.shared.testsuite.version>
 
-    <gnu.getopt.version>1.0.13</gnu.getopt.version>
+    <junit.version>4.10</junit.version>
     <log4j.version>1.2.14</log4j.version>
 
     <jboss712.version>7.1.2.Final</jboss712.version>
@@ -75,13 +75,6 @@
     </dependency>
 
     <dependency>
-      <groupId>gnu-getopt</groupId>
-      <artifactId>getopt</artifactId>
-      <version>${gnu.getopt.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
       <groupId>org.jboss.spec.javax.ejb</groupId>
       <artifactId>jboss-ejb-api_3.1_spec</artifactId>
       <version>${ejb.api.version}</version>
@@ -112,12 +105,10 @@
       <scope>test</scope>
     </dependency>
 
-
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.10</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -483,7 +474,10 @@
       </build>
     </profile>
 
-
+    <!--
+    Name:  wildfly800
+    Descr: WildFly 8.0.0 specific options
+    -->
     <profile>
       <id>wildfly800</id>
       <properties>
@@ -526,9 +520,6 @@
     <!--
     Name:  no-jboss-bind-address
     Descr: Set the default jboss.bind.address
-
-    command line cannot overwrite pom properties
-    http://jira.codehaus.org/browse/MNG-3546
     -->
     <profile>
       <id>no-jboss-bind-address</id>
@@ -542,6 +533,10 @@
       </properties>
     </profile>
 
+    <!--
+    Name:  default-mgmt-security
+    Descr: Settings for management security when communicating to application server
+    -->
     <profile>
       <id>default-mgmt-security</id>
       <activation>
@@ -565,12 +560,15 @@
       </properties>
     </profile>
 
+    <!--
+    Name:  use-eap6-bom
+    Descr: Using versions defined in EAP 6 BOM
+    -->
     <profile>
       <id>use-eap6-bom</id>
       <properties>
         <version.eap6-supported-artifacts>6.2.0.Beta1</version.eap6-supported-artifacts>
       </properties>
-
       <dependencyManagement>
         <dependencies>
           <dependency>
@@ -582,7 +580,6 @@
           </dependency>
         </dependencies>
       </dependencyManagement>
-
       <dependencies>
         <dependency>
           <groupId>org.jboss.ws.cxf</groupId>
@@ -591,6 +588,11 @@
       </dependencies>
     </profile>
 
+    <!--
+    Name:  slf4j-log4j12
+    Descr: By default enabled dependency for slf4j-log4j12. Can be suppressed with -Dno-slf4j-log4j12=true on command line.
+           EAP 6 based org.opensaml:openws has dependency on org.slf4j:log4j-over-slf4j and therefore slf4j-log4j12 must be disabled 
+    -->
     <profile>
       <id>slf4j-log4j12</id>
       <activation>
@@ -608,5 +610,4 @@
    </profile>
 
   </profiles>
-
 </project>
