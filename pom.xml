@@ -586,6 +586,12 @@
         <dependency>
           <groupId>org.jboss.ws.cxf</groupId>
           <artifactId>jbossws-cxf-client</artifactId>
+          <exclusions>
+            <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>log4j-over-slf4j</artifactId>
+            </exclusion>
+          </exclusions>
         </dependency>
         <dependency>
           <groupId>org.jboss.ws.cxf</groupId>
