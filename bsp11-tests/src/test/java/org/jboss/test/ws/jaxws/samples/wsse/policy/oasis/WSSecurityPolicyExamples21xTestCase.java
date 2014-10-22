@@ -60,22 +60,11 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
       System.setProperty("org.jboss.security.ignoreHttpsHost", "true");
       */
       JBossWSCXFTestSetup setup = new JBossWSCXFTestSetup(WSSecurityPolicyExamples21xTestCase.class,
-         "jaxws-samples-wsse-policy-oasis-21x.war,jaxws-samples-wsse-policy-oasis-client.jar");
+          DeploymentArchives.SERVER_21X_WAR + " " + DeploymentArchives.CLIENT_JAR);
       Map<String, String> sslOptions = new HashMap<String, String>();
-      if (isTargetJBoss7())
-      {
-         sslOptions.put("certificate-key-file", System.getProperty("org.jboss.ws.testsuite.server.keystore"));
-         sslOptions.put("password", "changeit");
-         sslOptions.put("verify-client", "false");
-         sslOptions.put("key-alias", "tomcat");
-      }
-      else
-      {
-         sslOptions.put("keystore-path", System.getProperty("org.jboss.ws.testsuite.server.keystore"));
-         sslOptions.put("keystore-password", "changeit");
-         sslOptions.put("verify-client", "false");
-         sslOptions.put("alias", "tomcat");
-      }
+      sslOptions.put("server-identity.ssl.keystore-path", System.getProperty("org.jboss.ws.testsuite.server.keystore"));
+      sslOptions.put("server-identity.ssl.keystore-password", "changeit");
+      sslOptions.put("server-identity.ssl.alias", "tomcat");
       setup.setHttpsConnectorRequirement(sslOptions);
       return setup;
    }
@@ -89,9 +78,8 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
    {
       Service service = Service.create(new URL(serviceURL + "SecurityService2111?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService2111Port"), ServiceIface.class);
-      setupWsse(proxy);
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, (serviceURL + "SecurityService2111").replaceFirst("8080", "7070"));
-
+      setupWsse(proxy, true);
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2111".replaceFirst("8080", "7070"));
       assertTrue(proxy.sayHello().equals("Hello - UsernameToken with plain text password"));
    }
 
@@ -104,9 +92,8 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
    {
       Service service = Service.create(new URL(serviceURL + "SecurityService2112?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService2112Port"), ServiceIface.class);
-      setupWsse(proxy);
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, (serviceURL + "SecurityService2112").replaceFirst("8080", "7070"));
-
+      setupWsse(proxy, false);
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2112".replaceFirst("8080", "7070"));
       assertTrue(proxy.sayHello().equals("Hello - UsernameToken without password"));
    }
 
@@ -119,8 +106,8 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
    {
       Service service = Service.create(new URL(serviceURL + "SecurityService2113?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService2113Port"), ServiceIface.class);
-      setupWsse(proxy);
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, (serviceURL + "SecurityService2113").replaceFirst("8080", "7070"));
+      setupWsse(proxy, true);
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2113".replaceFirst("8080", "7070"));
 
       assertTrue(proxy.sayHello().equals("Hello - UsernameToken with timestamp, nonce and password hash"));
    }
@@ -132,14 +119,9 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
     */
    public void test2121() throws Exception
    {
-      if (true) {
-         System.out.println("FIXME: [JBWS-3622] Restore HTTPS tests w/ Undertow");
-         return;
-      }
       Service service = Service.create(new URL(serviceURLHttps + "SecurityService2121?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService2121Port"), ServiceIface.class);
-      setupWsse(proxy);
-      
+      setupWsse(proxy, false);
       assertTrue(proxy.sayHello().equals("Hello - UsernameToken as supporting token"));
    }
 
@@ -152,8 +134,8 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
    {
       Service service = Service.create(new URL(serviceURL + "SecurityService213?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService213Port"), ServiceIface.class);
-      setupWsse(proxy);
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, (serviceURL + "SecurityService213").replaceFirst("8080", "7070"));
+      setupWsse(proxy, true);
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService213".replaceFirst("8080", "7070"));
 
       assertTrue(proxy.sayHello().equals("Hello - (WSS 1.0) UsernameToken with Mutual X.509v3 Authentication, Sign, Encrypt"));
    }
@@ -167,13 +149,13 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
    {
       Service service = Service.create(new URL(serviceURL + "SecurityService214?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService214Port"), ServiceIface.class);
-      setupWsse(proxy);
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, (serviceURL + "SecurityService214").replaceFirst("8080", "7070"));
+      setupWsse(proxy, false);
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService214".replaceFirst("8080", "7070"));
 
       assertTrue(proxy.sayHello().equals("Hello - (WSS 1.1) User Name with Certificates, Sign, Encrypt"));
    }
 
-   private void setupWsse(ServiceIface proxy)
+   private void setupWsse(ServiceIface proxy, boolean streaming)
    {
       ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.USERNAME, "kermit");
       ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.CALLBACK_HANDLER, new UsernamePasswordCallback());
@@ -181,5 +163,10 @@ public final class WSSecurityPolicyExamples21xTestCase extends JBossWSTest
       ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.ENCRYPT_PROPERTIES, Thread.currentThread().getContextClassLoader().getResource("META-INF/alice.properties"));
       ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.SIGNATURE_USERNAME, "alice");
       ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.ENCRYPT_USERNAME, "bob");
+      if (streaming)
+      {
+         ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.ENABLE_STREAMING_SECURITY, "true");
+         ((BindingProvider)proxy).getResponseContext().put(SecurityConstants.ENABLE_STREAMING_SECURITY, "true");
+      }
    }
 }
