@@ -460,6 +460,7 @@
         <dependency>
           <groupId>org.jboss.ws</groupId>
           <artifactId>jbossws-wildfly800-tests-integration</artifactId>
+          <version>${jbossws.wildfly800.version}</version>
         </dependency>
       </dependencies>
       <build>
@@ -513,6 +514,7 @@
          <dependency>
           <groupId>org.jboss.ws</groupId>
           <artifactId>jbossws-wildfly810-tests-integration</artifactId>
+          <version>${jbossws.wildfly810.version}</version>
         </dependency>
       </dependencies>
       <build>
