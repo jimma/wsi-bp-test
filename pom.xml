@@ -26,16 +26,17 @@
     <test.classes.directory>${project.build.directory}/test-classes</test.classes.directory>
     <test.resources.directory>${project.build.directory}/test-resources</test.resources.directory>
  
-    <jbossws.cxf.version>5.0.0-SNAPSHOT</jbossws.cxf.version>
-    <jbossws.cxf-test-utils.version>5.0.0-SNAPSHOT</jbossws.cxf-test-utils.version>
+    <jbossws.cxf.version>5.0.0.Final</jbossws.cxf.version>
+    <jbossws.cxf-test-utils.version>5.0.0.Beta2</jbossws.cxf-test-utils.version>  <!-- JBossWSTestSetup.java is no longer available  -->
+<!-- http://anonsvn.jboss.org/repos/jbossws/stack/cxf/tags/jbossws-cxf-5.0.0.Beta2/modules/test-utils/src/main/java/org/jboss/wsf/test/  -->
 
     <junit.version>4.10</junit.version>
     <log4j.version>1.2.16</log4j.version>
-    <jbossws.wildfly800.version>5.0.0-SNAPSHOT</jbossws.wildfly800.version>
-    <jbossws.wildfly810.version>5.0.0-SNAPSHOT</jbossws.wildfly810.version>
+    <jbossws.wildfly800.version>5.0.0.Final</jbossws.wildfly800.version>
+    <jbossws.wildfly810.version>5.0.0.Final</jbossws.wildfly810.version>
     <wildfly800.version>8.0.0.Final</wildfly800.version>
     <wildfly810.version>8.1.0.Final</wildfly810.version>
-    <wildfly900.version>9.0.0.Alpha2-SNAPSHOT</wildfly900.version>
+    <wildfly900.version>9.0.0.CR1</wildfly900.version>
 
     <ejb.api.version>1.0.2.Final</ejb.api.version>
     <jaxb.api.version>1.0.4.Final</jaxb.api.version>
