@@ -1,114 +1,79 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <name>JBoss Web Services - WSI-BSP11 Test</name>
-  <artifactId>wsi-bsp11-tests</artifactId>
-  <packaging>jar</packaging>
-  
-  <!-- Parent -->
-  <parent>
-    <groupId>org.jboss.ws.cxf</groupId>
-    <artifactId>wsi-bp-testsuite</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
-  <!-- Properties -->
-  <properties>
-    <shrinkwrap.version>1.1.3</shrinkwrap.version>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.jboss.shrinkwrap</groupId>
-      <artifactId>shrinkwrap-depchain</artifactId>
-      <version>${shrinkwrap.version}</version>
-      <type>pom</type>
-    </dependency>
-  </dependencies>
-  <!-- Profiles -->
-  <profiles>
-    <!-- 
-    Name:  noprepare
-    Descr: Skip test preparation with -Dnoprepare  
-    -->
-    <profile>
-      <id>noprepare</id>
-      <activation>
-        <property>
-          <name>!noprepare</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-          <plugin> <!-- This copies jbossws-cxf-factories jar to endorsed dir before the integration-tests are run -->
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-factories-jar</id>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${basedir}/../../endorsed/target/</directory>
-                      <includes>
-                        <include>jbossws-cxf-factories-${jbossws.cxf.version}.jar</include>
-                      </includes>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
+	<name>JBoss Web Services - WSI-BSP11 Test</name>
+	<artifactId>wsi-bsp11-tests</artifactId>
+	<packaging>jar</packaging>
 
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>build-jars</id>
-                <phase>test-compile</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                  <target>
-                    <property name="tests.output.dir" value="${project.build.directory}"/>
-                    <property name="tests.resources.dir" value="${basedir}/src/test/resources"/>
-                    <ant antfile="scripts/cxf-samples-jars-jaxws.xml" target="build-jars-jaxws"/>
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>exclude-integration-tests-BC-related</id>
-      <activation>
-        <property>
-          <name>exclude-integration-tests-BC-related</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <excludes combine.children="append">
-                <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
-                <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    
-  </profiles>
-  
+
+	<!-- Parent -->
+	<parent>
+		<groupId>org.jboss.ws.cxf</groupId>
+		<artifactId>wsi-bp-testsuite</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<!-- Profiles -->
+	<profiles>
+		<!-- Name: noprepare Descr: Skip test preparation with -Dnoprepare -->
+		<profile>
+			<id>noprepare</id>
+			<activation>
+				<property>
+					<name>!noprepare</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.gmaven</groupId>
+						<artifactId>gmaven-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>testsuite-default</id>
+								<phase>process-test-classes</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<source>${basedir}/src/test/scripts/jbws-testsuite-default.groovy</source>
+									<properties>
+										<inputFile>${jboss.home}/standalone/configuration/standalone.xml</inputFile>
+										<outputFile>${jboss.home}/standalone/configuration/jbws-testsuite-default.xml</outputFile>
+										<serverLog>jbws-testsuite-default.log</serverLog>
+										<usersPropFile>${project.build.directory}/test-classes/jbossws-users.properties</usersPropFile>
+										<rolesPropFile>${project.build.directory}/test-classes/jbossws-roles.properties</rolesPropFile>
+										<keystorePath>${project.build.directory}/test-classes/test.keystore</keystorePath>
+										<testResourcesDir>${project.build.directory}/test-resources</testResourcesDir>
+									</properties>
+								</configuration>
+							</execution>
+							<execution>
+								<id>testsuite-ssl-mutual-auth</id>
+								<phase>process-test-classes</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<source>${basedir}/src/test/scripts/jbws-testsuite-ssl-mutual-auth.groovy</source>
+									<properties>
+										<inputFile>${jboss.home}/standalone/configuration/standalone.xml</inputFile>
+										<outputFile>${jboss.home}/standalone/configuration/jbws-testsuite-ssl-mutual-auth.xml</outputFile>
+										<serverLog>jbws-testsuite-ssl-mutual-auth.log</serverLog>
+										<keystorePath>${project.build.directory}/test-classes/test.keystore</keystorePath>
+										<truststorePath>${project.build.directory}/test-classes/test.truststore</truststorePath>
+									</properties>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
 </project>

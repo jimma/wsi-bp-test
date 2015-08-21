@@ -21,49 +21,61 @@
  */
 package org.jboss.test.ws.jaxws.bp20.wsa.test1189;
 
+import java.io.File;
 import java.net.URL;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 
-import junit.framework.Test;
-
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.ws.jaxws.bp20.common.BP20Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
+import org.jboss.wsf.test.JBossWSTestHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(Arquillian.class)
 public class Test1189TestCase extends BP20Test
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1189/Test1189";
+   @ArquillianResource
+   private URL baseURL;
 
-   public static Test suite()
+   @Deployment(testable = false)
+   public static WebArchive createDeployment()
    {
-      return new JBossWSCXFTestSetup(Test1189TestCase.class, "jaxws-bp20test1189.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp20test1189.war");
+      archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
+            .addPackages(false, Filters.exclude(Test1189TestCase.class), Test1189TestCase.class.getPackage().getName())
+            .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/wsa/test1189/WEB-INF/web.xml"));
+      addResroucesToWebInf(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/wsa/test1189/WEB-INF", archive, "wsdl", "xsd");
+      return archive;
    }
 
+   @Test
+   @RunAsClient
    public void testWSA() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://tempuri.org/", "wsaTestService");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/Test1189" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
-      WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
+      WsaTestPortType port = (WsaTestPortType)service.getPort(WsaTestPortType.class);
       // invoke method
-      ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp20test1189/Test1189");
+      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, getProxyAddress(baseURL) + "/Test1189");
 
       System.out.println("Invoking echo...");
       String response = port.echo("input string");
       System.out.println("echo.result: " + response);
-      
-      
+
       System.out.println("Invoking notify...");
       port.notify("input string");
-      
-      
-      
- 
-      
 
    }
 }

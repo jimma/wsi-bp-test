@@ -23,6 +23,7 @@ package org.jboss.test.ws.jaxws.bp20.wsa.test1190;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -40,31 +41,48 @@ import javax.xml.ws.WebServiceException;
 import javax.xml.ws.soap.AddressingFeature;
 import javax.xml.ws.soap.SOAPFaultException;
 
-import junit.framework.Test;
-
 import org.apache.cxf.helpers.IOUtils;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.ws.jaxws.bp20.common.BP20Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
-
+import org.jboss.wsf.test.JBossWSTestHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+@RunWith(Arquillian.class)
 public class Test119XTestCase extends BP20Test
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20test1190/Test1190";
 
-   public static Test suite()
+   @ArquillianResource
+   private URL baseURL;
+
+   @Deployment(testable = false)
+   public static WebArchive createDeployment()
    {
-      return new JBossWSCXFTestSetup(Test119XTestCase.class, "jaxws-bp20test1190.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp20test1190.war");
+      archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
+            .addPackages(false, Filters.exclude(Test119XTestCase.class), Test119XTestCase.class.getPackage().getName())
+            .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/wsa/test1190/WEB-INF/web.xml"));
+      addResroucesToWebInf(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/wsa/test1190/WEB-INF", archive, "wsdl", "xsd");
+      return archive;
    }
-
+   @Test
+   @RunAsClient 
    public void testWSA() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://example.org/wsaTestService", "wsaTestService");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/Test1190" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
       WsaTestPortType port = (WsaTestPortType) service.getPort(WsaTestPortType.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp20test1190/Test1190");
+            getProxyAddress(baseURL) + "/Test1190");  
 
       System.out.println("Invoking echo1...");
       String response = port.echo1("input string");
@@ -77,22 +95,24 @@ public class Test119XTestCase extends BP20Test
    }
    
    //Test1191
+   @Test
+   @RunAsClient
    public void testMessageIdMissed() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://example.org/wsaTestService", "wsaTestService");
       QName portName = new QName("http://example.org/wsaTestService", "wsaTestPort");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/Test1190" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
            
       Dispatch<SOAPMessage> disp = service.createDispatch(portName, SOAPMessage.class,
             Service.Mode.MESSAGE,
             new AddressingFeature(false, false));
       ((BindingProvider) disp).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp20test1190/Test1190");
+            getProxyAddress(baseURL) + "/Test1190"); 
       InputStream msgIns = getClass().getResourceAsStream("./wsa-without-messageid.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", "9090");
+      msg = msg.replaceAll("$PORT", PROXY_PORT);
       
       ByteArrayInputStream bout = new ByteArrayInputStream(msg.getBytes());
       
@@ -110,23 +130,25 @@ public class Test119XTestCase extends BP20Test
    
    
    //Test1192
+   @Test
+   @RunAsClient
    public void testMustUnderstand() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://example.org/wsaTestService", "wsaTestService");
       QName portName = new QName("http://example.org/wsaTestService", "wsaTestPort");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/Test1192" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
            
       Dispatch<SOAPMessage> disp = service.createDispatch(portName, SOAPMessage.class,
             Service.Mode.MESSAGE,
             new AddressingFeature(false, false));
       ((BindingProvider) disp).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp20test1190/Test1192");
+            getProxyAddress(baseURL) + "/Test1192"); 
       //To mustunderstand
       InputStream msgIns = getClass().getResourceAsStream("./wsa-to-mustunderstand.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", "9090");
+      msg = msg.replaceAll("$PORT", PROXY_PORT);
       
       ByteArrayInputStream bout = new ByteArrayInputStream(msg.getBytes());
       
@@ -144,7 +166,7 @@ public class Test119XTestCase extends BP20Test
       //fault to must understand
       msgIns = getClass().getResourceAsStream("./wsa-faultto-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", "9090");
+      msg = msg.replaceAll("$PORT", PROXY_PORT);
       
       bout = new ByteArrayInputStream(msg.getBytes());
       
@@ -161,7 +183,7 @@ public class Test119XTestCase extends BP20Test
       
       msgIns = getClass().getResourceAsStream("./wsa-faultto-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", "9090");
+      msg = msg.replaceAll("$PORT", PROXY_PORT);
       
       bout = new ByteArrayInputStream(msg.getBytes());
       
@@ -178,7 +200,7 @@ public class Test119XTestCase extends BP20Test
       
       msgIns = getClass().getResourceAsStream("./wsa-replyto-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", "9090");
+      msg = msg.replaceAll("$PORT", PROXY_PORT);
       
       bout = new ByteArrayInputStream(msg.getBytes());
       
@@ -194,7 +216,7 @@ public class Test119XTestCase extends BP20Test
       } 
       msgIns = getClass().getResourceAsStream("./wsa-msgid-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", "9090");
+      msg = msg.replaceAll("$PORT", PROXY_PORT);
       
       bout = new ByteArrayInputStream(msg.getBytes());
       
@@ -210,11 +232,13 @@ public class Test119XTestCase extends BP20Test
       } 
       
    }
+   @Test
+   @RunAsClient
    public void testVersionMisMatch() throws Exception
    {
       //test1194-version mismatch  
       // construct proxy 
-      URL url = new URL(PROXY_ADDRESS + "/jaxws-bp20test1190/Test1190");
+      URL url = new URL(baseURL + "/Test1190");
       HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
       InputStream msgIns = getClass().getResourceAsStream("./wsa-version-mismatch.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));

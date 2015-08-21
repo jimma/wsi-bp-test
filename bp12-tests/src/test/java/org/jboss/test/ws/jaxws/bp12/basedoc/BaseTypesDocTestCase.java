@@ -21,6 +21,7 @@
  */
 package org.jboss.test.ws.jaxws.bp12.basedoc;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
@@ -32,30 +33,48 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 
-import junit.framework.Test;
-
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.ws.jaxws.bp12.common.BP12Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
-
-
+import org.jboss.wsf.test.JBossWSTestHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+@RunWith(Arquillian.class)
 public class BaseTypesDocTestCase extends BP12Test
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12basedoc/BPBaseDoc";
+   @ArquillianResource
+   private URL baseURL;
 
-   public static Test suite()
+   @Deployment(testable = false)
+   public static WebArchive createDeployment()
    {
-      return new JBossWSCXFTestSetup(BaseTypesDocTestCase.class, "jaxws-bp12basedoc.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp12basedoc.war");
+      archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
+            .addPackages(false, Filters.exclude(BaseTypesDocTestCase.class), BaseTypesDocTestCase.class.getPackage().getName())
+            .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp12/basedoc/WEB-INF/web.xml"));
+      addResroucesToWebInf(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp12/basedoc/WEB-INF", archive, "wsdl", "xsd");
+      JBossWSTestHelper.writeToFile(archive);
+      return archive;
    }
-
+   
+  
+   @Test
+   @RunAsClient
    public void testAllTypes() throws Exception
    {
       // construct proxy
-      QName serviceName = new QName("http://tempuri.org/", "BaseDataTypesDocLitWService");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      QName serviceName = new QName("http://tempuri.org/", "BaseDataTypesDocLitWService");    
+      URL wsdlURL = new URL(baseURL + "/BPBaseDoc" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
-      IBaseDataTypesDocLitW port = (IBaseDataTypesDocLitW) service.getPort(IBaseDataTypesDocLitW.class);
+      IBaseDataTypesDocLitW port = (IBaseDataTypesDocLitW)service.getPort(IBaseDataTypesDocLitW.class);
       // invoke method
-      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, PROXY_ADDRESS + "/jaxws-bp12basedoc/BPBaseDoc");
+      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, getProxyAddress(baseURL) + "/BPBaseDoc");
       System.out.println("Invoking retInt...");
       int _retInt_inInt = 10;
       int _retInt__return = port.retInt(_retInt_inInt);
@@ -64,7 +83,7 @@ public class BaseTypesDocTestCase extends BP12Test
       System.out.println("Invoking retDateTime...");
       GregorianCalendar calendar = new GregorianCalendar();
       calendar.setTimeInMillis(System.currentTimeMillis());
-      javax.xml.datatype.XMLGregorianCalendar _retDateTime_inDateTime =  DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
+      javax.xml.datatype.XMLGregorianCalendar _retDateTime_inDateTime = DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
       javax.xml.datatype.XMLGregorianCalendar _retDateTime__return = port.retDateTime(_retDateTime_inDateTime);
       System.out.println("retDateTime.result=" + _retDateTime__return);
 
@@ -119,7 +138,7 @@ public class BaseTypesDocTestCase extends BP12Test
       System.out.println("retByte.result=" + _retByte__return);
 
       System.out.println("Invoking retAnyType...");
-      Object _retAnyType_inObject = new QName("http://foo","bar");
+      Object _retAnyType_inObject = new QName("http://foo", "bar");
       Object _retAnyType__return = port.retAnyType(_retAnyType_inObject);
       System.out.println("retAnyType.result=" + _retAnyType__return);
 

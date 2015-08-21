@@ -32,8 +32,8 @@ import javax.xml.ws.WebFault;
 
 @WebFault(name = "SignatureHeaderFaultContract", targetNamespace = "http://example.org/signature")
 public class SignatureDocumentLiteralSign7SignatureHeaderFaultFaultMessage extends Exception {
-    
-    private org.jboss.test.ws.jaxws.bp20.wsa.test1197.SignatureHeaderFaultContract signatureHeaderFaultContract;
+   private static final long serialVersionUID = 1L;
+   private org.jboss.test.ws.jaxws.bp20.wsa.test1197.SignatureHeaderFaultContract signatureHeaderFaultContract;
 
     public SignatureDocumentLiteralSign7SignatureHeaderFaultFaultMessage() {
         super();

@@ -1,716 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ~ JBoss, Home of Professional Open Source. ~ Copyright 2014, Red Hat, 
+	Inc., and individual contributors ~ as indicated by the @author tags. See 
+	the copyright.txt file in the ~ distribution for a full listing of individual 
+	contributors. ~ ~ This is free software; you can redistribute it and/or modify 
+	it ~ under the terms of the GNU Lesser General Public License as ~ published 
+	by the Free Software Foundation; either version 2.1 of ~ the License, or 
+	(at your option) any later version. ~ ~ This software is distributed in the 
+	hope that it will be useful, ~ but WITHOUT ANY WARRANTY; without even the 
+	implied warranty of ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU ~ Lesser General Public License for more details. ~ ~ You should 
+	have received a copy of the GNU Lesser General Public ~ License along with 
+	this software; if not, write to the Free ~ Software Foundation, Inc., 51 
+	Franklin St, Fifth Floor, Boston, MA ~ 02110-1301 USA, or see the FSF site: 
+	http://www.fsf.org. -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>JBoss WSI Basic Profile TestSuite</name>
+	<groupId>org.jboss.ws.cxf</groupId>
+	<artifactId>wsi-bp-testsuite</artifactId>
+	<packaging>pom</packaging>
+	<description>JBossWS CXF WSI BP Test</description>
+	<version>2.0.0-SNAPSHOT</version>
 
-  <name>JBoss Web Services - WSI-BP Testsuite</name>
-  <groupId>org.jboss.ws.cxf</groupId>
-  <artifactId>wsi-bp-testsuite</artifactId>
-  <packaging>pom</packaging>
-  <description>JBossWS CXF WSI BP Test</description>
-  <version>1.0.0-SNAPSHOT</version>
-  
-  <!-- Parent -->
-  <parent>
-    <groupId>org.jboss.ws</groupId>
-    <artifactId>jbossws-parent</artifactId>
-    <version>1.2.0.Final</version>
-  </parent>
+	<!-- Parent -->
+	<parent>
+		<groupId>org.jboss.ws</groupId>
+		<artifactId>jbossws-parent</artifactId>
+		<version>1.3.0.Beta1</version>
+	</parent>
 
-  <!-- Properties -->
-  <properties>
-    <surefire.security.args>-Djava.security.manager -Djava.security.policy=src/test/etc/tst.policy</surefire.security.args>
-    <surefire.memory.args>-Xmx768m -XX:MaxPermSize=450m</surefire.memory.args>
-    <surefire.jdwp.args>-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</surefire.jdwp.args>
-    <surefire.management.args>-Dcom.sun.management.jmxremote</surefire.management.args>
-    <test.archive.directory>${project.build.directory}/test-libs</test.archive.directory>
-    <test.classes.directory>${project.build.directory}/test-classes</test.classes.directory>
-    <test.resources.directory>${project.build.directory}/test-resources</test.resources.directory>
- 
-    <jbossws.cxf.version>5.0.0.Beta2</jbossws.cxf.version>
-    <jbossws.cxf-test-utils.version>5.0.0.Beta2</jbossws.cxf-test-utils.version>  <!-- JBossWSTestSetup.java is no longer available  -->
-<!-- http://anonsvn.jboss.org/repos/jbossws/stack/cxf/tags/jbossws-cxf-5.0.0.Beta2/modules/test-utils/src/main/java/org/jboss/wsf/test/  -->
+	<!-- Source Control Management -->
+	<scm>
+		<connection>scm:git:https://github.com/jbossws/wsi-bp-tests.git</connection>
+		<developerConnection>scm:git:https://github.com/jbossws/wsi-bp-tests.git</developerConnection>
+		<url>https://github.com/jbossws/wsi-bp-tests</url>
+		<tag>HEAD</tag>
+	</scm>
 
-    <junit.version>4.10</junit.version>
-    <log4j.version>1.2.16</log4j.version>
-    <jbossws.wildfly800.version>5.0.0.Beta2</jbossws.wildfly800.version>
-    <jbossws.wildfly810.version>5.0.0.Beta2</jbossws.wildfly810.version>
-    <wildfly800.version>8.0.0.Final</wildfly800.version>
-    <wildfly810.version>8.1.0.Final</wildfly810.version>
-    <wildfly900.version>9.0.0.CR1</wildfly900.version>
+	<!-- Modules -->
+	<modules>
+		<module>bp12-test</module>
+		<module>bp20-test</module>
+		<module>bsp11-test</module>
+	</modules>
 
-    <ejb.api.version>1.0.2.Final</ejb.api.version>
-    <jaxb.api.version>1.0.4.Final</jaxb.api.version>
-    <jaxws.api.version>2.0.2.Final</jaxws.api.version>
-    <jsr181.api.version>1.0-MR1</jsr181.api.version>
-    <picketlink.version>2.1.7.Final</picketlink.version>
-    <org.slf4j.version>1.6.1</org.slf4j.version>
-  </properties>
+	<!-- Properties -->
+	<properties>
+		<surefire.jvm.args></surefire.jvm.args>
+		<surefire.jdwp.args>-Xdebug -Xnoagent -Djava.compiler=NONE
+			-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</surefire.jdwp.args>
+		<surefire.management.args>-Dcom.sun.management.jmxremote</surefire.management.args>
+		<test.archive.directory>${project.build.directory}/test-libs</test.archive.directory>
+		<test.classes.directory>${project.build.directory}/test-classes</test.classes.directory>
+		<test.resources.directory>${project.build.directory}/test-resources</test.resources.directory>
+		<jbossws.integration.target>${jbossws.integration.target}</jbossws.integration.target>
+		<jbossws.cxf.version>5.1.0.Beta1</jbossws.cxf.version>
+		<junit.version>4.10</junit.version>
+		<log4j.version>1.2.16</log4j.version>
+		<jbossws.wildfly900.version>5.1.0.Beta1</jbossws.wildfly900.version>
+		<jbossws.wildfly901.version>5.1.0.Beta1</jbossws.wildfly901.version>
+		<jbossws.wildfly1000.version>5.1.0.Beta1</jbossws.wildfly1000.version>
+		<wildfly900.version>9.0.0.Final</wildfly900.version>
+		<wildfly901.version>9.0.1.Final</wildfly901.version>
+		<wildfly1000.version>10.0.0.Beta2-SNAPSHOT</wildfly1000.version>
 
-  <!-- Modules -->
-  <modules>
-    <module>bp12-tests</module>
-    <module>bp20-tests</module>
-    <module>bsp11-tests</module>
-  </modules>
+		<ejb.api.version>1.0.2.Final</ejb.api.version>
+		<jaxb.api.version>1.0.4.Final</jaxb.api.version>
+		<jaxws.api.version>2.0.2.Final</jaxws.api.version>
+		<jsr181.api.version>1.0-MR1</jsr181.api.version>
+		<picketlink.version>2.5.2.Final</picketlink.version>
+		<org.slf4j.version>1.6.1</org.slf4j.version>
 
-  <!-- Dependencies -->
-  <dependencies>
-    <dependency>
-      <groupId>org.jboss.ws.cxf</groupId>
-      <artifactId>jbossws-cxf-client</artifactId>
-      <version>${jbossws.cxf.version}</version>
-    </dependency>
+		<shrinkwrap.version>1.1.3</shrinkwrap.version>
+		<arquillian.version>1.1.7.Final</arquillian.version>
+		<arquillian-wildfly-container.version>1.0.0.Alpha5</arquillian-wildfly-container.version>
+	</properties>
+	<!-- Dependencies -->
+	<dependencies>
 
-    <dependency>  <!-- needed for bsp11 tests -->
-      <groupId>org.jboss.ws.cxf</groupId>
-      <artifactId>jbossws-cxf-server</artifactId>
-      <version>${jbossws.cxf.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>jbossws-cxf-factories</artifactId>
+			<version>${jbossws.cxf.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.jboss.ws.cxf</groupId>
-      <artifactId>jbossws-cxf-test-utils</artifactId>
-      <version>${jbossws.cxf-test-utils.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>jbossws-cxf-client</artifactId>
+			<version>${jbossws.cxf.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.jboss.ws.cxf</groupId>
-      <artifactId>jbossws-cxf-factories</artifactId>
-      <version>${jbossws.cxf.version}</version>
-    </dependency>
+		<dependency>  <!-- needed for bsp11 tests -->
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>jbossws-cxf-server</artifactId>
+			<version>${jbossws.cxf.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.jboss.spec.javax.ejb</groupId>
-      <artifactId>jboss-ejb-api_3.1_spec</artifactId>
-      <version>${ejb.api.version}</version>
-    </dependency>
 
-    <dependency>
-      <groupId>javax.jws</groupId>
-      <artifactId>jsr181-api</artifactId>
-      <version>${jsr181.api.version}</version>
-    </dependency>
 
-    <dependency>
-      <groupId>org.jboss.spec.javax.xml.ws</groupId>
-      <artifactId>jboss-jaxws-api_2.2_spec</artifactId>
-      <version>${jaxws.api.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+			<version>${ejb.api.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.jboss.spec.javax.xml.bind</groupId>
-      <artifactId>jboss-jaxb-api_2.2_spec</artifactId>
-      <version>${jaxb.api.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>javax.jws</groupId>
+			<artifactId>jsr181-api</artifactId>
+			<version>${jsr181.api.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.jboss.ws</groupId>
-      <artifactId>jbossws-wildfly810-server-integration</artifactId>
-      <version>${jbossws.wildfly810.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.ws</groupId>
-      <artifactId>jbossws-wildfly810-tests-integration</artifactId>
-      <version>${jbossws.wildfly810.version}</version>
-    </dependency>
-    <dependency>
-       <groupId>org.wildfly</groupId>
-       <artifactId>wildfly-webservices-tests-integration</artifactId>
-       <version>${wildfly900.version}</version>
-     </dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.xml.ws</groupId>
+			<artifactId>jboss-jaxws-api_2.2_spec</artifactId>
+			<version>${jaxws.api.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-core</artifactId>
-      <version>${picketlink.version}</version>
-      <scope>test</scope>
-    </dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.xml.bind</groupId>
+			<artifactId>jboss-jaxb-api_2.2_spec</artifactId>
+			<version>${jaxb.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-webservices-tests-integration</artifactId>
+			<version>${wildfly900.version}</version>
+		</dependency>
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  
-  <build>
-    <testResources>
-      <!-- copy etc files -->
-      <testResource>
-        <directory>src/test/etc</directory>
-        <filtering>true</filtering>
-        <excludes>
-          <exclude>*.keystore</exclude>
-          <exclude>*.truststore</exclude>
-        </excludes>
-      </testResource>
-      <testResource>
-        <directory>src/test/etc</directory>
-        <filtering>false</filtering>
-        <includes>
-          <include>*.keystore</include>
-          <include>*.truststore</include>
-        </includes>
-      </testResource>
-      <!-- copy handler definitions -->
-      <testResource>
-        <targetPath>../test-classes</targetPath>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-      </testResource>
-      <!-- copy non binary files -->
-      <testResource>
-        <targetPath>../test-resources</targetPath>
-        <directory>src/test/resources</directory>
-        <includes>
-          <include>**/*.wsdl</include>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>true</filtering>
-      </testResource>
-      <!-- copy binary files -->
-      <testResource>
-        <targetPath>../test-resources</targetPath>
-        <directory>src/test/resources</directory>
-        <excludes>
-          <exclude>**/*.wsdl</exclude>
-          <exclude>**/*.xml</exclude>
-        </excludes>
-      </testResource>
-    </testResources>
-    <plugins>
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>validate-jboss-home</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target>
-                <echo />
-                <echo message="profile=${jbossws.integration.target}" />
-                <echo message="jboss.home=${jboss.home}" />
-                <echo />
-              </target>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+		<dependency>
+			<groupId>org.picketlink</groupId>
+			<artifactId>picketlink-common</artifactId>
+			<version>${picketlink.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.picketlink</groupId>
+			<artifactId>picketlink-federation</artifactId>
+			<version>${picketlink.version}</version>
+			<scope>test</scope>
+		</dependency>
 
-      <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>create-endorsed-dir</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.jboss.spec.javax.xml.ws</groupId>
-                  <artifactId>jboss-jaxws-api_2.2_spec</artifactId>
-                  <type>jar</type>
-                  <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.jboss.spec.javax.xml.bind</groupId>
-                  <artifactId>jboss-jaxb-api_2.2_spec</artifactId>
-                  <type>jar</type>
-                  <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.jboss.spec.javax.ejb</groupId>
-                  <artifactId>jboss-ejb-api_3.1_spec</artifactId>
-                  <type>jar</type>
-                  <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.jboss.ws.cxf</groupId>
-                  <artifactId>jbossws-cxf-factories</artifactId>
-                  <type>jar</type>
-                  <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-          <failIfNoTests>false</failIfNoTests>
-        </configuration>
-        <executions>
-          <execution>
-            <id>integration-tests</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <configuration>
-              <skip>false</skip>
-              <includes>
-                <include>**/*TestCase.java</include>
-              </includes>
-              <parallel>classes</parallel>
-              <threadCount>1</threadCount>
-              <perCoreThreadCount>true</perCoreThreadCount>
-              <systemProperties>
-                <property>
-                  <name>jboss.bind.address</name>
-                  <value>${jboss.bind.address}</value>
-                </property>
-                <property>
-                  <name>java.protocol.handler.pkgs</name>
-                  <value>org.jboss.net.protocol|org.jboss.vfs.protocol|org.jboss.virtual.protocol</value>
-                </property>
-                <property>
-                  <name>javax.net.ssl.trustStore</name>
-                  <value>${project.build.directory}/test-classes/test.truststore</value>
-                </property>
-                <property>
-                  <name>javax.net.ssl.trustStorePassword</name>
-                  <value>changeit</value>
-                </property>
-                <property>
-                  <name>javax.net.ssl.trustStoreType</name>
-                  <value>jks</value>
-                </property>
-                <property>
-                  <name>javax.net.ssl.keyStore</name>
-                  <value>${project.build.directory}/test-classes/client.keystore</value>
-                </property>
-                <property>
-                  <name>javax.net.ssl.keyStorePassword</name>
-                  <value>changeit</value>
-                </property>
-                <property>
-                  <name>javax.net.ssl.keyStoreType</name>
-                  <value>jks</value>
-                </property>
-                <property>
-                  <name>org.jboss.security.ignoreHttpsHost</name>
-                  <value>true</value>
-                </property>
-                <property>
-                  <name>jboss.home</name>
-                  <value>${jboss.home}</value>
-                </property>
-                <property>
-                  <name>jbossws.integration.target</name>
-                  <value>${jbossws.integration.target}</value>
-                </property>
-                <property>
-                  <name>test.disable.deployment</name>
-                  <value>false</value>
-                </property>
-                <property>
-                  <name>log4j.output.dir</name>
-                  <value>${log4j.output.dir}</value>
-                </property>
-                <property>
-                  <name>appclient.output.dir</name>
-                  <value>${appclient.output.dir}</value>
-                </property>
-                <property>
-                  <name>org.jboss.ws.testsuite.securityDomain.users.propfile</name>
-                  <value>${project.build.directory}/test-classes/jbossws-users.properties</value>
-                </property>
-                <property>
-                  <name>org.jboss.ws.testsuite.securityDomain.roles.propfile</name>
-                  <value>${project.build.directory}/test-classes/jbossws-roles.properties</value>
-                </property>
-                <property>
-                  <name>org.jboss.ws.testsuite.server.keystore</name>
-                  <value>${project.build.directory}/test-classes/test.keystore</value>
-                </property>
-                <property>
-                  <name>org.jboss.ws.testsuite.server.truststore</name>
-                  <value>${project.build.directory}/test-classes/test.truststore</value>
-                </property>
-                <property>
-                  <name>test.archive.directory</name>
-                  <value>${test.archive.directory}</value>
-                </property>
-                <property>
-                  <name>test.classes.directory</name>
-                  <value>${test.classes.directory}</value>
-                </property>
-                <property>
-                  <name>test.resources.directory</name>
-                  <value>${test.resources.directory}</value>
-                </property>
-                <property>
-                  <name>test.username</name>
-                  <value>${test.username}</value>
-                </property>
-                <property>
-                  <name>test.password</name>
-                  <value>${test.password}</value>
-                </property>
-                <property>
-                  <name>wsdl.publish.location</name>
-                  <value>${wsdl.publish.location}</value>
-                </property>
-              </systemProperties>
-            </configuration>
-          </execution>          
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap</groupId>
+			<artifactId>shrinkwrap-depchain</artifactId>
+			<version>${shrinkwrap.version}</version>
+			<type>pom</type>
+		</dependency>
 
-  <!-- Profiles -->
-  <profiles>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>${arquillian.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>jbossws-cxf-test-utils</artifactId>
+			<version>${jbossws.cxf.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly.arquillian</groupId>
+			<artifactId>wildfly-arquillian-container-managed</artifactId>
+			<version>${arquillian-wildfly-container.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.slf4j</groupId>
+					<artifactId>slf4j-jboss-logmanager</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-    <!--
-    Name:  debug
-    Descr: Enable remote debuging for tests
-    -->
-    <profile>
-      <id>debug</id>
-      <activation>
-        <property>
-          <name>debug</name>
-        </property>
-      </activation>
-      <properties>
-        <surefire.jvm.args>${surefire.security.args} ${surefire.memory.args} ${surefire.jdwp.args}</surefire.jvm.args>
-      </properties>
-    </profile>
-    <profile>
-      <id>no-debug</id>
-      <activation>
-        <property>
-          <name>!debug</name>
-        </property>
-      </activation>
-      <properties>
-        <surefire.jvm.args>${surefire.security.args} ${surefire.memory.args}</surefire.jvm.args>
-      </properties>
-    </profile>
-    
-    <!--
-    Name:  management
-    Descr: Enable remote jmx management (useful to attach JConsole, for instance)
-    -->
-    <profile>
-      <id>management</id>
-      <activation>
-        <property>
-          <name>management</name>
-        </property>
-      </activation>
-      <properties>
-        <surefire.jvm.management.args>${surefire.management.args}</surefire.jvm.management.args>
-      </properties>
-    </profile>
-    <profile>
-      <id>no-management</id>
-      <activation>
-        <property>
-          <name>!management</name>
-        </property>
-      </activation>
-      <properties>
-        <surefire.jvm.management.args> </surefire.jvm.management.args>
-      </properties>
-    </profile>
+	</dependencies>
+	<!-- Build -->
+	<build>
+		<testResources>
+			<!-- copy etc files -->
+			<testResource>
+				<directory>src/test/etc</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>*.keystore</exclude>
+					<exclude>*.truststore</exclude>
+				</excludes>
+			</testResource>
+			<testResource>
+				<directory>src/test/etc</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*.keystore</include>
+					<include>*.truststore</include>
+				</includes>
+			</testResource>
+			<!-- copy handler definitions -->
+			<testResource>
+				<targetPath>../test-classes</targetPath>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</testResource>
+			<!-- copy non binary files -->
+			<testResource>
+				<targetPath>../test-resources</targetPath>
+				<directory>src/test/resources</directory>
+				<includes>
+					<include>**/*.wsdl</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</testResource>
+			<!-- copy binary files -->
+			<testResource>
+				<targetPath>../test-resources</targetPath>
+				<directory>src/test/resources</directory>
+				<excludes>
+					<exclude>**/*.wsdl</exclude>
+					<exclude>**/*.xml</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>validate-jboss-home</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo />
+								<echo message="profile=${jbossws.integration.target}" />
+								<echo message="jboss.home=${jboss.home}" />
+								<echo />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-    <!--
-    Name:  hudson
-    Descr: Ignore test failures on hudson
-    -->
-    <profile>
-      <id>hudson</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <testFailureIgnore>true</testFailureIgnore>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>${surefire.jvm.args}</argLine>
+					<failIfNoTests>false</failIfNoTests>
+					<runOrder>alphabetical</runOrder>
+					<skip>false</skip>
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+					<excludes combine.children="append">
+					</excludes>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*TestCase.java</include>
+					</includes>
+					<systemPropertyVariables>
+						<java.protocol.handler.pkgs>org.jboss.net.protocol|org.jboss.vfs.protocol|org.jboss.virtual.protocol</java.protocol.handler.pkgs>
+						<javax.net.ssl.trustStore>${project.build.directory}/test-classes/test.truststore</javax.net.ssl.trustStore>
+						<javax.net.ssl.trustStorePassword>changeit</javax.net.ssl.trustStorePassword>
+						<javax.net.ssl.trustStoreType>jks</javax.net.ssl.trustStoreType>
+						<javax.net.ssl.keyStore>${project.build.directory}/test-classes/client.keystore</javax.net.ssl.keyStore>
+						<javax.net.ssl.keyStorePassword>changeit</javax.net.ssl.keyStorePassword>
+						<javax.net.ssl.keyStoreType>jks</javax.net.ssl.keyStoreType>
+						s
+						<jboss.home>${jboss.home}</jboss.home>
+						<jbossws.integration.target>${jbossws.integration.target}</jbossws.integration.target>
+						<cxf.tls-client.disableCNCheck>true</cxf.tls-client.disableCNCheck>
+						<log4j.output.dir>${log4j.output.dir}</log4j.output.dir>
+						<appclient.output.dir>${appclient.output.dir}</appclient.output.dir>
+						<org.jboss.ws.testsuite.securityDomain.users.propfile>${project.build.directory}/test-classes/jbossws-users.properties</org.jboss.ws.testsuite.securityDomain.users.propfile>
+						<org.jboss.ws.testsuite.securityDomain.roles.propfile>${project.build.directory}/test-classes/jbossws-roles.properties</org.jboss.ws.testsuite.securityDomain.roles.propfile>
+						<org.jboss.ws.testsuite.server.keystore>${project.build.directory}/test-classes/test.keystore</org.jboss.ws.testsuite.server.keystore>
+						<org.jboss.ws.testsuite.server.truststore>${project.build.directory}/test-classes/test.truststore</org.jboss.ws.testsuite.server.truststore>
+						<test.archive.directory>${test.archive.directory}</test.archive.directory>
+						<test.classes.directory>${test.classes.directory}</test.classes.directory>
+						<test.resources.directory>${test.resources.directory}</test.resources.directory>
+						<test.username>${test.username}</test.username>
+						<test.password>${test.password}</test.password>
+						<wsdl.publish.location>${wsdl.publish.location}</wsdl.publish.location>
+					</systemPropertyVariables>
+				</configuration>
 
-  <!--
-    Name:  wildfly800
-    Descr: WildFly-8.0.0 specific options
-    -->
-    <profile>
-      <id>wildfly800</id>
-      <properties>
-        <jboss.version>${wildfly800.version}</jboss.version>
-        <jbossws.integration.target>wildfly800</jbossws.integration.target>
-        <remote.port>8080</remote.port>
-        <remote.protocol>http-remoting</remote.protocol>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.jboss.ws</groupId>
-          <artifactId>jbossws-wildfly800-tests-integration</artifactId>
-          <version>${jbossws.wildfly800.version}</version>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <compilerArguments>
-                <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
-              </compilerArguments>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
-              <excludes combine.children="append">
-                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
-                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustOnBehalfOfTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustActAsTestCase*</exclude>
-                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
-                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
-                 <!--this broke the WSI-Analyzer-->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
-                 <!--this broke the alogrithm conformance in wsi-bsp-->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    
-    <!--
-    Name:  wildfly810
-    Descr: WildFly-8.1.0 specific options
-    -->
-    <profile>
-      <id>wildfly810</id>
-      <properties>
-        <jboss.version>${wildfly810.version}</jboss.version>
-        <jbossws.integration.target>wildfly810</jbossws.integration.target>
-        <remote.port>8080</remote.port>
-        <remote.protocol>http-remoting</remote.protocol>
-      </properties>
-      <dependencies>
-         <dependency>
-          <groupId>org.jboss.ws</groupId>
-          <artifactId>jbossws-wildfly810-tests-integration</artifactId>
-          <version>${jbossws.wildfly810.version}</version>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <compilerArguments>
-                <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
-              </compilerArguments>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
-              <excludes combine.children="append">
-                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
-                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustOnBehalfOfTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustActAsTestCase*</exclude>
-                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
-                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
-                 <!--this broke the WSI-Analyzer-->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
-                 <!--this broke the alogrithm conformance in wsi-bsp-->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    
-    <!--
-    Name:  wildfly900
-    Descr: WildFly-9.0.0 specific options
-    -->
-    <profile>
-      <id>wildfly900</id>
-      <properties>
-        <jboss.version>${wildfly900.version}</jboss.version>
-        <jbossws.integration.target>wildfly900</jbossws.integration.target>
-        <remote.port>8080</remote.port>
-        <remote.protocol>http-remoting</remote.protocol>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.wildfly</groupId>
-          <artifactId>wildfly-webservices-tests-integration</artifactId>
-          <version>${jboss.version}</version>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <compilerArguments>
-                <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
-              </compilerArguments>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>${surefire.jvm.args} ${surefire.jvm.management.args} ${surefire.default-mgmt-serurity.args} -Djava.endorsed.dirs=${project.build.directory}/endorsed</argLine>
-              <excludes combine.children="append">
-                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070)-->
-                 <!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustOnBehalfOfTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustActAsTestCase*</exclude>
-                 <!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032)-->
-                 <!--After WSBRSP-4 is resolved we can port KerberosTestCase(with spring installed)-->   
-                 <!--this broke the WSI-Analyzer-->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
-                 <!--this broke the alogrithm conformance in wsi-bsp-->
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
-                 <exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>           
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
+			</plugin>
+		</plugins>
+	</build>
 
-    <!--
-    Name:  no-jboss-bind-address
-    Descr: Set the default jboss.bind.address
-    -->
-    <profile>
-      <id>no-jboss-bind-address</id>
-      <activation>
-        <property>
-          <name>!jboss.bind.address</name>
-        </property>
-      </activation>
-      <properties>
-        <jboss.bind.address>localhost</jboss.bind.address>
-      </properties>
-    </profile>
 
-    <!--
-    Name:  default-mgmt-security
-    Descr: Settings for management security when communicating to application server
-    -->
-    <profile>
-      <id>default-mgmt-security</id>
-      <activation>
-        <property>
-          <name>!jbossws.deployer.authentication.username</name>
-        </property>
-      </activation>
-      <properties>
-        <surefire.default-mgmt-serurity.args>-Djbossws.deployer.authentication.username=admin -Djbossws.deployer.authentication.password=admin</surefire.default-mgmt-serurity.args>
-      </properties>
-    </profile>
-    <profile>
-      <id>custom-mgmt-security</id>
-      <activation>
-        <property>
-          <name>jbossws.deployer.authentication.username</name>
-        </property>
-      </activation>
-      <properties>
-        <surefire.default-mgmt-serurity.args> </surefire.default-mgmt-serurity.args>
-      </properties>
-    </profile>
+	<profiles>
 
-    <!--
-    Name:  use-eap6-bom
-    Descr: Using versions defined in EAP 6 BOM
-    -->
-    <profile>
-      <id>use-eap6-bom</id>
-      <properties>
-        <version.eap6-supported-artifacts>6.2.0.Beta1</version.eap6-supported-artifacts>
-      </properties>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>org.jboss.bom</groupId>
-            <artifactId>eap6-supported-artifacts</artifactId>
-            <version>${version.eap6-supported-artifacts}</version>
-            <type>pom</type>
-            <scope>import</scope>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-      <dependencies>
-        <dependency>
-          <groupId>org.jboss.ws.cxf</groupId>
-          <artifactId>jbossws-cxf-client</artifactId>
-          <exclusions>
-            <exclusion>
-              <groupId>org.slf4j</groupId>
-              <artifactId>log4j-over-slf4j</artifactId>
-            </exclusion>
-          </exclusions>
-        </dependency>
-        <dependency>
-          <groupId>org.jboss.ws.cxf</groupId>
-          <artifactId>jbossws-cxf-server</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.jboss.ws.cxf</groupId>
-          <artifactId>jbossws-cxf-factories</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
+		<!-- Name: debug Descr: Enable remote debuging for tests -->
+		<profile>
+			<id>debug</id>
+			<activation>
+				<property>
+					<name>debug</name>
+				</property>
+			</activation>
+			<properties>
+				<surefire.jvm.args>${surefire.jdwp.args}</surefire.jvm.args>
+			</properties>
+		</profile>
+		<!-- Name: wildfly900 Descr: WildFly-9.0.0 specific options -->
+		<profile>
+			<id>wildfly900</id>
+			<properties>
+				<jboss.version>${wildfly900.version}</jboss.version>
+				<jbossws.integration.target>wildfly900</jbossws.integration.target>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.ws</groupId>
+					<artifactId>jbossws-wildfly900-tests-integration</artifactId>
+					<version>${jbossws.wildfly900.version}</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<compilerArguments>
+								<endorseddirs>${project.build.directory}/endorsed</endorseddirs>
+							</compilerArguments>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes combine.children="append">
+								<!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070) -->
+								<!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustOnBehalfOfTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustActAsTestCase*</exclude>
+								<!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032) -->
+								<!--After WSBRSP-4 is resolved we can port KerberosTestCase(with 
+									spring installed) -->
+								<!--this broke the WSI-Analyzer -->
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+								<!--this broke the alogrithm conformance in wsi-bsp -->
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
-    <!--
-    Name:  slf4j-log4j12
-    Descr: By default enabled dependency for slf4j-log4j12. Can be suppressed with -Dno-slf4j-log4j12=true on command line.
-           EAP 6 based org.opensaml:openws has dependency on org.slf4j:log4j-over-slf4j and therefore slf4j-log4j12 must be disabled 
-    -->
-    <profile>
-      <id>slf4j-log4j12</id>
-      <activation>
-        <property>
-          <name>!no-slf4j-log4j12</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-log4j12</artifactId>
-          <version>${org.slf4j.version}</version>
-        </dependency>
-      </dependencies>
-   </profile>
 
-  </profiles>
+
+		<!-- Name: wildfly1000 Descr: WildFly-10.0.0 specific options -->
+		<profile>
+			<id>wildfly1000</id>
+			<properties>
+				<jboss.version>${wildfly1000.version}</jboss.version>
+				<jbossws.integration.target>wildfly1000</jbossws.integration.target>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-webservices-tests-integration</artifactId>
+					<version>${wildfly1000.version}</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<compilerArguments>
+								<endorseddirs>${project.build.directory}/endorsed</endorseddirs>
+							</compilerArguments>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes combine.children="append">
+								<!--https://tools.oasis-open.org/issues/browse/WSBRSP-3(BSP3070) -->
+								<!-- # [PLFED-390] PicketLink STS chokes on WS-Policy 1.5 tags -->
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustOnBehalfOfTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustActAsTestCase*</exclude>
+								<!--https://tools.oasis-open.org/issues/browse/WSBRSP-4(BSP3032) -->
+								<!--After WSBRSP-4 is resolved we can port KerberosTestCase(with 
+									spring installed) -->
+								<!--this broke the WSI-Analyzer -->
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/secconv/*TestCase*</exclude>
+								<!--this broke the alogrithm conformance in wsi-bsp -->
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Name: use-eap6-bom Descr: Using versions defined in EAP 6 BOM -->
+		<profile>
+			<id>use-eap6-bom</id>
+			<properties>
+				<version.eap6-supported-artifacts>6.2.0.Beta1</version.eap6-supported-artifacts>
+			</properties>
+			<dependencyManagement>
+				<dependencies>
+					<dependency>
+						<groupId>org.jboss.bom</groupId>
+						<artifactId>eap6-supported-artifacts</artifactId>
+						<version>${version.eap6-supported-artifacts}</version>
+						<type>pom</type>
+						<scope>import</scope>
+					</dependency>
+				</dependencies>
+			</dependencyManagement>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.ws.cxf</groupId>
+					<artifactId>jbossws-cxf-client</artifactId>
+					<exclusions>
+						<exclusion>
+							<groupId>org.slf4j</groupId>
+							<artifactId>log4j-over-slf4j</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.ws.cxf</groupId>
+					<artifactId>jbossws-cxf-server</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.ws.cxf</groupId>
+					<artifactId>jbossws-cxf-factories</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>exclude-integration-tests-unlimited-strength-related</id>
+			<activation>
+				<property>
+					<name>exclude-integration-tests-unlimited-strength-related</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes combine.children="append">
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/oasis/WSSecurityPolicyExamples22xTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/oasis/WSSecurityPolicyExamples23xTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustActAsTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustBearerTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustHolderOfKeyTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustOnBehalfOfTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/trust/WSTrustPicketLinkTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/SignEncryptGCMTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/samples/wsse/policy/basic/AnnotatedSignEncryptTestCase*</exclude>
+								<exclude>org/jboss/test/ws/jaxws/cxf/jbws3648/PolicyAttachmentTestCase*</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>

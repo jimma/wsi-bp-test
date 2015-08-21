@@ -21,36 +21,53 @@
  */
 package org.jboss.test.ws.jaxws.bp12.wsa.test1198;
 
+import java.io.File;
 import java.net.URL;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 
-import junit.framework.Test;
-
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.ws.jaxws.bp12.common.BP12Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
-
+import org.jboss.wsf.test.JBossWSTestHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+@RunWith(Arquillian.class)
 public class Test1198TestCase extends BP12Test
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp12test1198/Test1198";
+   @ArquillianResource
+   private URL baseURL;
 
-   public static Test suite()
+   @Deployment(testable = false)
+   public static WebArchive createDeployment()
    {
-      return new JBossWSCXFTestSetup(Test1198TestCase.class, "jaxws-bp12test1198.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp12test1198.war");
+      archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
+            .addPackages(false, Filters.exclude(Test1198TestCase.class), Test1198TestCase.class.getPackage().getName())
+            .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp12/wsa/test1198/WEB-INF/web.xml"));
+      addResroucesToWebInf(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp12/wsa/test1198/WEB-INF", archive, "wsdl", "xsd");
+      return archive;
    }
-
+   @Test
+   @RunAsClient 
    public void testSignature() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://tempuri.org/", "WSAddressingCR");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/Test1198" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
       SignatureRpcLiteral port = (SignatureRpcLiteral) service.getPort(SignatureRpcLiteral.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp12test1198/Test1198");
+            getProxyAddress(baseURL) + "/Test1198"); 
 
 
       //request 1      

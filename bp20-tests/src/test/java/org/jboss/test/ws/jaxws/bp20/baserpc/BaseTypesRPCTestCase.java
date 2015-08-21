@@ -21,6 +21,7 @@
  */
 package org.jboss.test.ws.jaxws.bp20.baserpc;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
@@ -32,29 +33,45 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 
-import junit.framework.Test;
-
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.ws.jaxws.bp20.common.BP20Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
-
+import org.jboss.wsf.test.JBossWSTestHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+@RunWith(Arquillian.class)
 public class BaseTypesRPCTestCase extends BP20Test
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20baserpc/BPBaseRPC";
+   @ArquillianResource
+   private URL baseURL;
 
-   public static Test suite()
+   @Deployment(testable = false)
+   public static WebArchive createDeployment()
    {
-      return new JBossWSCXFTestSetup(BaseTypesRPCTestCase.class, "jaxws-bp20baserpc.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp20baserpc.war");
+      archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
+            .addPackages(false, Filters.exclude(BaseTypesRPCTestCase.class), BaseTypesRPCTestCase.class.getPackage().getName())
+            .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/baserpc/WEB-INF/web.xml"));
+      addResroucesToWebInf(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/baserpc/WEB-INF", archive, "wsdl", "xsd");
+      return archive;
    }
-
+   @Test
+   @RunAsClient
    public void testAllTypes() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://tempuri.org/", "BaseDataTypesRpcLitService");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/BPBaseRPC" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
       IBaseDataTypesRpcLit port = (IBaseDataTypesRpcLit) service.getPort(IBaseDataTypesRpcLit.class);
       // invoke method
-      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, PROXY_ADDRESS + "/jaxws-bp20baserpc/BPBaseRPC");
+      ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, getProxyAddress(baseURL) + "/BPBaseRPC");
       System.out.println("Invoking retInt...");
       int _retInt_inInt = 10;
       int _retInt__return = port.retInt(_retInt_inInt);

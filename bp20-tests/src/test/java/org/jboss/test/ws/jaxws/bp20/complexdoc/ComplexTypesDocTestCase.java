@@ -21,36 +21,54 @@
  */
 package org.jboss.test.ws.jaxws.bp20.complexdoc;
 
+import java.io.File;
 import java.net.URL;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 
-import junit.framework.Test;
-
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.ws.jaxws.bp20.common.BP20Test;
-import org.jboss.wsf.test.JBossWSCXFTestSetup;
-
+import org.jboss.wsf.test.JBossWSTestHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+@RunWith(Arquillian.class)
 public class ComplexTypesDocTestCase extends BP20Test
 {
-   private final String serviceURL = "http://" + getServerHost() + ":8080/jaxws-bp20complexdoc/ComplexDoc";
+   @ArquillianResource
+   private URL baseURL;
 
-   public static Test suite()
+   @Deployment(testable = false)
+   public static WebArchive createDeployment()
    {
-      return new JBossWSCXFTestSetup(ComplexTypesDocTestCase.class, "jaxws-bp20complexdoc.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp20complexdoc.war");
+      archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
+            .addPackages(false, Filters.exclude(ComplexTypesDocTestCase.class), ComplexTypesDocTestCase.class.getPackage().getName())
+            .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/complexdoc/WEB-INF/web.xml"));
+      addResroucesToWebInf(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp20/complexdoc/WEB-INF", archive, "wsdl", "xsd");
+      return archive;
    }
-
+   
+   @Test
+   @RunAsClient   
    public void testAllTypes() throws Exception
    {
       // construct proxy
       QName serviceName = new QName("http://tempuri.org/", "ComplexDataTypesDocLitWService");
-      URL wsdlURL = new URL(serviceURL + "?wsdl");
+      URL wsdlURL = new URL(baseURL + "/ComplexDoc" + "?wsdl");
       Service service = Service.create(wsdlURL, serviceName);
       IComplexDataTypesDocLitW port = (IComplexDataTypesDocLitW) service.getPort(IComplexDataTypesDocLitW.class);
       // invoke method
       ((BindingProvider) port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-            PROXY_ADDRESS + "/jaxws-bp20complexdoc/ComplexDoc");
+              getProxyAddress(baseURL) + "/ComplexDoc");
 
       System.out.println("Invoking retArrayString1D...");
       StringArray inArrayString1D = new StringArray();

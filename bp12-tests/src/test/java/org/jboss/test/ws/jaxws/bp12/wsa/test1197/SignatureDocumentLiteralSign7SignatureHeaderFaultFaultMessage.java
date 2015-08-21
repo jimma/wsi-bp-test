@@ -27,6 +27,7 @@ import javax.xml.ws.WebFault;
 public class SignatureDocumentLiteralSign7SignatureHeaderFaultFaultMessage extends Exception
 {
 
+   private static final long serialVersionUID = 1L;
    private org.jboss.test.ws.jaxws.bp12.wsa.test1197.SignatureHeaderFaultContract signatureHeaderFaultContract;
 
    public SignatureDocumentLiteralSign7SignatureHeaderFaultFaultMessage()
