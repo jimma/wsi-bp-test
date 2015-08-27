@@ -32,9 +32,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.wsf.test.JBossWSTest;
 //TODO: move these to JBossWSTest
 public abstract class BSP11Test extends JBossWSTest {
-	   protected final String PROXY_ADDRESS = System.getProperty("proxy.address", "http://localhost:8080");
+
 	   protected final String PROXY_PORT = System.getProperty("proxy.port", "8080");
-	   protected final String BSP_PROXY_PORT = System.getProperty("bsp.proxy.port", "8080");
 
 	   public static void listFiles(String directoryName, Set<File> files, String... types)
 	   {
@@ -78,13 +77,9 @@ public abstract class BSP11Test extends JBossWSTest {
 	      
 	   }
 	   
-	   protected String getProxyAddress(URL baseURL) {
-	      return this.PROXY_ADDRESS + baseURL.getPath();
-	   }
-	   
 	   protected String getBSPProxyBaseURL(URL baseURL) {
 		   String port = String.valueOf(baseURL.getPort());
-		   return baseURL.toString().replaceFirst(port, this.BSP_PROXY_PORT);
+		   return baseURL.toString().replaceFirst(port, this.PROXY_PORT);
 	   }
 
 }

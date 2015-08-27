@@ -135,7 +135,7 @@ public final class WSSecurityPolicyExamples23xTestCase extends BSP11Test
       Service service = Service.create(new URL(serviceURL + "SecurityService2311?wsdl"), serviceName);
       ServiceIface proxy = (ServiceIface)service.getPort(new QName(NS, "SecurityService2311Port"), ServiceIface.class);
       ((BindingProvider)proxy).getRequestContext().put(SecurityConstants.SAML_CALLBACK_HANDLER, new SamlCallbackHandler());
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2311".replaceFirst("8080", this.BSP_PROXY_PORT));
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2311".replaceFirst("8080", this.PROXY_PORT));
 
       assertTrue(proxy.sayHello().equals("Hello - (WSS1.0) SAML1.1 Assertion (Bearer)"));
    }
@@ -203,7 +203,7 @@ public final class WSSecurityPolicyExamples23xTestCase extends BSP11Test
       reqCtx.put(SecurityConstants.ENCRYPT_PROPERTIES, Thread.currentThread().getContextClassLoader().getResource("META-INF/alice.properties"));
       reqCtx.put(SecurityConstants.SIGNATURE_USERNAME, "alice");
       reqCtx.put(SecurityConstants.ENCRYPT_USERNAME, "bob");
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2314".replaceFirst("8080", BSP_PROXY_PORT));
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2314".replaceFirst("8080", PROXY_PORT));
 
       try {
          assertTrue(proxy.sayHello().equals("Hello - (WSS1.0) SAML1.1 Sender Vouches with X.509 Certificates, Sign, Optional Encrypt"));
@@ -234,7 +234,7 @@ public final class WSSecurityPolicyExamples23xTestCase extends BSP11Test
       reqCtx.put(SecurityConstants.ENCRYPT_PROPERTIES, Thread.currentThread().getContextClassLoader().getResource("META-INF/alice.properties"));
       reqCtx.put(SecurityConstants.SIGNATURE_USERNAME, "alice");
       reqCtx.put(SecurityConstants.ENCRYPT_USERNAME, "bob");
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2315".replaceFirst("8080", BSP_PROXY_PORT));
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2315".replaceFirst("8080", PROXY_PORT));
       try {
          assertTrue(proxy.sayHello().equals("Hello - (WSS1.0) SAML1.1 Holder of Key, Sign, Optional Encrypt"));
       } catch (Exception e) {
@@ -264,7 +264,7 @@ public final class WSSecurityPolicyExamples23xTestCase extends BSP11Test
       reqCtx.put(SecurityConstants.ENCRYPT_PROPERTIES, Thread.currentThread().getContextClassLoader().getResource("META-INF/alice.properties"));
       reqCtx.put(SecurityConstants.SIGNATURE_USERNAME, "alice");
       reqCtx.put(SecurityConstants.ENCRYPT_USERNAME, "bob");
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2321".replaceFirst("8080", BSP_PROXY_PORT));
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2321".replaceFirst("8080", PROXY_PORT));
       assertTrue(proxy.sayHello().equals("Hello - (WSS1.1) SAML 2.0 Bearer"));
    }
 
@@ -332,7 +332,7 @@ public final class WSSecurityPolicyExamples23xTestCase extends BSP11Test
       reqCtx.put(SecurityConstants.ENCRYPT_PROPERTIES, Thread.currentThread().getContextClassLoader().getResource("META-INF/alice.properties"));
       reqCtx.put(SecurityConstants.SIGNATURE_USERNAME, "alice");
       reqCtx.put(SecurityConstants.ENCRYPT_USERNAME, "bob");
-      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2324".replaceFirst("8080", BSP_PROXY_PORT));
+      ((BindingProvider)proxy).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceURL + "SecurityService2324".replaceFirst("8080", PROXY_PORT));
       try {
          assertTrue(proxy.sayHello().equals("Hello - (WSS1.1) SAML1.1/2.0 Sender Vouches with X.509 Certificate, Sign, Encrypt"));
       } catch (Exception e) {
