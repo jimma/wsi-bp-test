@@ -9,6 +9,7 @@
             <property name="javaVmArguments">-server -Xms64m -Xmx512m -Djboss.socket.binding.port-offset=0 -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false</property>
             <property name="serverConfig">jbws-testsuite-default.xml</property>
             <property name="allowConnectingToRunningServer">true</property>
+            <property name="managementAddress">${jboss.bind.address:localhost}</property>
             <property name="managementPort">9990</property>
             <!-- AS7-4070 -->
             <property name="waitForPorts">8787 9990</property>
