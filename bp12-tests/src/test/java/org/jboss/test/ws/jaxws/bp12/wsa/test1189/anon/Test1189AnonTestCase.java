@@ -54,7 +54,7 @@ public class Test1189AnonTestCase extends BP12Test
    @Deployment(testable = false)
    public static WebArchive createDeployment()
    {
-      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp12test1189-anno.war");
+      WebArchive archive = ShrinkWrap.create(WebArchive.class, "jaxws-bp12test1189-anon.war");
       archive.setManifest(new StringAsset("Manifest-Version: 1.0\n" + "Dependencies: org.apache.cxf\n"))
             .addPackages(false, Filters.exclude(Test1189AnonTestCase.class), Test1189AnonTestCase.class.getPackage().getName())
             .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp12/wsa/test1189-anon/WEB-INF/web.xml"));
