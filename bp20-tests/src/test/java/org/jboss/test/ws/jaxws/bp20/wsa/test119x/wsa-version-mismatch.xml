@@ -1,0 +1,13 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelopesss">
+	<soap:Header>
+		<Action xmlns="http://www.w3.org/2005/08/addressing">http://example.org/wsaTestService/wsaTestPortType/echo1Request
+		</Action>
+		<To xmlns="http://www.w3.org/2005/08/addressing">http://localhost:$PORT/jaxws-bp12test119x/Test119x</To>
+		<ReplyTo xmlns="http://www.w3.org/2005/08/addressing">
+			<Address>http://www.w3.org/2005/08/addressing/anonymous</Address>
+		</ReplyTo>
+	</soap:Header>
+	<soap:Body>
+		<echoIn1 xmlns="http://example.org/echo">input string</echoIn1>
+	</soap:Body>
+</soap:Envelope>
