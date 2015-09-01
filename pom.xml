@@ -318,6 +318,25 @@
 				<surefire.jvm.args>${surefire.jdwp.args}</surefire.jvm.args>
 			</properties>
 		</profile>
+
+		<!--
+		    Name:  hudson
+            Descr: Ignore test failures on hudson
+        -->
+		<profile>
+		  <id>hudson</id>
+		  <build>
+			<plugins>
+			  <plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+				  <testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			  </plugin>
+			</plugins>
+		  </build>
+		</profile>
+
 		<!-- Name: wildfly900 Descr: WildFly-9.0.0 specific options -->
 		<profile>
 			<id>wildfly900</id>
