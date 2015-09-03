@@ -89,7 +89,7 @@ public class WSTrustTestCase extends BSP11Test
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/wsdl/ws-trust-1.4-service.wsdl"), "wsdl/ws-trust-1.4-service.wsdl")
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/stsstore.jks"), "classes/stsstore.jks")
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/stsKeystore.properties"), "classes/stsKeystore.properties")
-         .addAsManifestResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/permissions.xml"), "permissions.xml")
+         .addAsManifestResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/META-INF/permissions.xml"), "permissions.xml")
          .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/web.xml"));
       return archive;
    }
@@ -109,7 +109,7 @@ public class WSTrustTestCase extends BSP11Test
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/wsdl/SecurityService_schema1.xsd"), "wsdl/SecurityService_schema1.xsd")
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/servicestore.jks"), "classes/servicestore.jks")
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/serviceKeystore.properties"), "classes/serviceKeystore.properties")
-         .addAsManifestResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/permissions.xml"), "permissions.xml");
+         .addAsManifestResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/META-INF/permissions.xml"), "permissions.xml");
       return archive;
    }
 
@@ -181,7 +181,7 @@ public class WSTrustTestCase extends BSP11Test
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/wsdl/holderofkey-ws-trust-1.4-service.wsdl"), "wsdl/holderofkey-ws-trust-1.4-service.wsdl")
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/stsstore.jks"), "classes/stsstore.jks")
          .addAsWebInfResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/stsKeystore.properties"), "classes/stsKeystore.properties")
-         .addAsManifestResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/permissions.xml"), "permissions.xml")
+         .addAsManifestResource(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/META-INF/permissions.xml"), "permissions.xml")
          .setWebXML(new File(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/samples/wsse/policy/trust/WEB-INF/holderofkey/web.xml"));
       return archive;
    }
