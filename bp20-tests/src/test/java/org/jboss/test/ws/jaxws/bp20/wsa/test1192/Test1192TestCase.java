@@ -118,23 +118,6 @@ public class Test1192TestCase extends BP20Test
                 ex.getMessage().contains("[{http://www.w3.org/2005/08/addressing}FaultTo] are not understood"));
       }
 
-      msgIns = getClass().getResourceAsStream("./wsa-faultto-mustunderstand.xml");
-      msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", PROXY_PORT);
-
-      bout = new ByteArrayInputStream(msg.getBytes());
-
-      soapReqMsg = MessageFactory.newInstance().createMessage(null, bout);
-      assertNotNull(soapReqMsg);
-
-      try {
-          disp.invoke(soapReqMsg);
-          fail("SOAPFaultException is expected");
-      } catch (SOAPFaultException ex) {
-          assertTrue("[{http://www.w3.org/2005/08/addressing}FaultTo] are not understood is expected",
-                ex.getMessage().contains("[{http://www.w3.org/2005/08/addressing}FaultTo] are not understood"));
-      }
-
       msgIns = getClass().getResourceAsStream("./wsa-replyto-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
       msg = msg.replaceAll("$PORT", PROXY_PORT);
