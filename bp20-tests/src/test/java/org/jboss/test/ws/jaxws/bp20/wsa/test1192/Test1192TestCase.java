@@ -85,7 +85,7 @@ public class Test1192TestCase extends BP20Test
       //To mustunderstand
       InputStream msgIns = getClass().getResourceAsStream("./wsa-to-mustunderstand.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", PROXY_PORT);
+      msg = msg.replaceAll("\\$PORT", PROXY_PORT);
 
       ByteArrayInputStream bout = new ByteArrayInputStream(msg.getBytes());
 
@@ -103,7 +103,7 @@ public class Test1192TestCase extends BP20Test
       //fault to must understand
       msgIns = getClass().getResourceAsStream("./wsa-faultto-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", PROXY_PORT);
+      msg = msg.replaceAll("\\$PORT", PROXY_PORT);
 
       bout = new ByteArrayInputStream(msg.getBytes());
 
@@ -120,7 +120,7 @@ public class Test1192TestCase extends BP20Test
 
       msgIns = getClass().getResourceAsStream("./wsa-replyto-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", PROXY_PORT);
+      msg = msg.replaceAll("\\$PORT", PROXY_PORT);
 
       bout = new ByteArrayInputStream(msg.getBytes());
 
@@ -136,7 +136,7 @@ public class Test1192TestCase extends BP20Test
       }
       msgIns = getClass().getResourceAsStream("./wsa-msgid-mustunderstand.xml");
       msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", PROXY_PORT);
+      msg = msg.replaceAll("\\$PORT", PROXY_PORT);
 
       bout = new ByteArrayInputStream(msg.getBytes());
 

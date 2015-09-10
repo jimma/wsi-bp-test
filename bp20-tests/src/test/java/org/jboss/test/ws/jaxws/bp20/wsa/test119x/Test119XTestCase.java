@@ -111,7 +111,7 @@ public class Test119XTestCase extends BP20Test
             getProxyAddress(baseURL) + "/Test119x");
       InputStream msgIns = getClass().getResourceAsStream("./wsa-without-messageid.xml");
       String msg = new String(IOUtils.readBytesFromStream(msgIns));
-      msg = msg.replaceAll("$PORT", PROXY_PORT);
+      msg = msg.replaceAll("\\$PORT", PROXY_PORT);
       
       ByteArrayInputStream bout = new ByteArrayInputStream(msg.getBytes());
       
