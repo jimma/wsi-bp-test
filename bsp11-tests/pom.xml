@@ -14,6 +14,13 @@
 		<version>2.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>wsi-bp-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>  
 	<!-- Profiles -->
 	<profiles>
 		<!-- Name: noprepare Descr: Skip test preparation with -Dnoprepare -->

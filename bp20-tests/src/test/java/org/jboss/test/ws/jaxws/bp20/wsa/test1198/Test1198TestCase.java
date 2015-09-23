@@ -36,12 +36,12 @@ import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bp20.common.BP20Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
-public class Test1198TestCase extends BP20Test
+public class Test1198TestCase extends BPTest
 {
    @ArquillianResource
    private URL baseURL;

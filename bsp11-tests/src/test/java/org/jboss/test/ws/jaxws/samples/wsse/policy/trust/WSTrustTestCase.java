@@ -38,7 +38,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.test.ws.jaxws.samples.wsse.policy.trust.actas.ActAsServiceIface;
 import org.jboss.test.ws.jaxws.samples.wsse.policy.trust.bearer.BearerIface;
 import org.jboss.test.ws.jaxws.samples.wsse.policy.trust.holderofkey.HolderOfKeyIface;
@@ -61,7 +61,7 @@ import org.junit.runner.RunWith;
  * @since 08-Feb-2012
  */
 @RunWith(Arquillian.class)
-public class WSTrustTestCase extends BSP11Test
+public class WSTrustTestCase extends BPTest
 {
    private static final String STS_DEP = "jaxws-samples-wsse-policy-trust-sts";
    private static final String SERVER_DEP = "jaxws-samples-wsse-policy-trust";

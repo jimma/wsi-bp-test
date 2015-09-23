@@ -42,6 +42,7 @@
 
 	<!-- Modules -->
 	<modules>
+                <module>bp-common</module>
 		<module>bp12-tests</module>
 		<module>bp20-tests</module>
 		<module>bsp11-tests</module>
@@ -93,13 +94,17 @@
 			<version>${jbossws.cxf.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>jbossws-cxf-test-utils</artifactId>
+			<version>${jbossws.cxf.version}</version>
+		</dependency>
+
 		<dependency>  <!-- needed for bsp11 tests -->
 			<groupId>org.jboss.ws.cxf</groupId>
 			<artifactId>jbossws-cxf-server</artifactId>
 			<version>${jbossws.cxf.version}</version>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
@@ -160,12 +165,6 @@
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-container</artifactId>
 			<version>${arquillian.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.ws.cxf</groupId>
-			<artifactId>jbossws-cxf-test-utils</artifactId>
-			<version>${jbossws.cxf.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.wildfly.arquillian</groupId>

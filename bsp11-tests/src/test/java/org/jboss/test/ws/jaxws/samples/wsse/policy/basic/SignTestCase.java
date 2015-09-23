@@ -38,7 +38,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.jboss.wsf.test.WrapThreadContextClassLoader;
 import org.junit.Test;
@@ -52,7 +52,7 @@ import org.junit.runner.RunWith;
  */
 
 @RunWith(Arquillian.class)
-public final class SignTestCase extends BSP11Test
+public final class SignTestCase extends BPTest
 {
    private static final String POJO_DEPLOYMENT = "jaxws-samples-wsse-policy-sign";
    private static final String EJB3_DEPLOYMENT = "jaxws-samples-wsse-policy-sign-ejb";

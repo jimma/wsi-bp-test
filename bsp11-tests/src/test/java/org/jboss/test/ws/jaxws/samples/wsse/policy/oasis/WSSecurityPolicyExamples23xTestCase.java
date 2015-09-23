@@ -41,7 +41,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.wsf.test.CryptoHelper;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.jboss.wsf.test.WrapThreadContextClassLoader;
@@ -59,7 +59,7 @@ import org.junit.runner.RunWith;
  * @since 10-Sep-2012
  */
 @RunWith(Arquillian.class)
-public final class WSSecurityPolicyExamples23xTestCase extends BSP11Test
+public final class WSSecurityPolicyExamples23xTestCase extends BPTest
 {
    private static final String DEPLOYMENT = "jaxws-samples-wsse-policy-oasis-23x";
    private static final String SSL_MUTUAL_AUTH_SERVER = "ssl-mutual-auth"; 

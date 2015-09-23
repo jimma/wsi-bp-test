@@ -36,7 +36,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,7 +50,7 @@ import org.junit.runner.RunWith;
  * @since 26-May-2011
  */
 @RunWith(Arquillian.class)
-public final class UsernameAuthorizationDigestEjbTestCase extends BSP11Test
+public final class UsernameAuthorizationDigestEjbTestCase extends BPTest
 {
    @ArquillianResource
    private URL baseURL;

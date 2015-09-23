@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.test.ws.jaxws.bp12.common;
+package org.jboss.test.ws.jaxws.bp.common;
 
 import java.io.File;
 import java.net.URL;
@@ -31,7 +31,7 @@ import java.util.Set;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.wsf.test.JBossWSTest;
 
-public abstract class BP12Test extends JBossWSTest
+public abstract class BPTest extends JBossWSTest
 {
    protected final String PROXY_ADDRESS = System.getProperty("proxy.address", "http://localhost:8080");
    protected final String PROXY_PORT = System.getProperty("proxy.port", "8080");
@@ -81,4 +81,11 @@ public abstract class BP12Test extends JBossWSTest
    protected String getProxyAddress(URL baseURL) {
       return this.PROXY_ADDRESS + baseURL.getPath();
    }
+   
+   
+	protected String getBSPProxyBaseURL(URL baseURL) {
+		String port = String.valueOf(baseURL.getPort());
+		return baseURL.toString().replaceFirst(port, this.PROXY_PORT);
+	}
+   
 }

@@ -1,4 +1,4 @@
-package org.jboss.test.ws.jaxws.bp12.common;
+package org.jboss.test.ws.jaxws.bp.common;
 
 import java.io.File;
 import java.util.Map;
@@ -8,11 +8,11 @@ import junit.framework.Assert;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.junit.Test;
 
-public class BP12TestCase
+public class BPTestCase
 {
    @Test
    public void testResource() {
-     Map<File, String> maps = BP12Test.getResources(JBossWSTestHelper.getTestResourcesDir() + "/jaxws/bp12/basedoc/WEB-INF", "wsdl", "xsd");
+     Map<File, String> maps = BPTest.getResources(JBossWSTestHelper.getTestResourcesDir() + "/test/WEB-INF", "wsdl", "xsd");
      Assert.assertEquals("Unexpected resources files", 3, maps.size());
    }
 

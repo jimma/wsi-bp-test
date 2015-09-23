@@ -37,7 +37,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.jboss.wsf.test.WrapThreadContextClassLoader;
 import org.junit.Test;
@@ -51,7 +51,7 @@ import org.junit.runner.RunWith;
  * @since 13-Jan-2012
  */
 @RunWith(Arquillian.class)
-public final class MultipleClientsSignEncryptTestCase extends BSP11Test
+public final class MultipleClientsSignEncryptTestCase extends BPTest
 {
     
    @ArquillianResource

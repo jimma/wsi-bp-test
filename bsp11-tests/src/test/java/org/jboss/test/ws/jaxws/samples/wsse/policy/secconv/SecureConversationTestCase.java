@@ -36,7 +36,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.test.ws.jaxws.samples.wsse.policy.basic.KeystorePasswordCallback;
 import org.jboss.wsf.test.JBossWSTestHelper;
 import org.jboss.wsf.test.WrapThreadContextClassLoader;
@@ -55,7 +55,7 @@ import org.junit.runner.RunWith;
  * @since 06-Sep-2012
  */
 @RunWith(Arquillian.class)
-public final class SecureConversationTestCase extends BSP11Test
+public final class SecureConversationTestCase extends BPTest
 {
    @ArquillianResource
    private URL baseURL;

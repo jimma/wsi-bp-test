@@ -36,7 +36,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.ws.jaxws.bsp11.common.BSP11Test;
+import org.jboss.test.ws.jaxws.bp.common.BPTest;
 import org.jboss.test.ws.jaxws.samples.wsse.policy.basic.KeystorePasswordCallback;
 import org.jboss.wsf.test.CryptoHelper;
 import org.jboss.wsf.test.JBossWSTestHelper;
@@ -54,7 +54,7 @@ import org.junit.runner.RunWith;
  * @since 07-Sep-2012
  */
 @RunWith(Arquillian.class)
-public final class WSSecurityPolicyExamples22xTestCase extends BSP11Test
+public final class WSSecurityPolicyExamples22xTestCase extends BPTest
 {
    private final String NS = "http://www.jboss.org/jbossws/ws-extensions/wssecuritypolicy/oasis-samples";
    private final QName serviceName = new QName(NS, "SecurityService");
