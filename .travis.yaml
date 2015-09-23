@@ -1,0 +1,13 @@
+---
+language: java
+script: mvn clean install -Pwildfly1000
+jdk:
+- oraclejdk8
+sudo: false
+
+branches:
+  only:
+  - master
+notifications:
+  email:
+  - mail2jimma@gmail.com
