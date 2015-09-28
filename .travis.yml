@@ -1,14 +1,12 @@
 ---
+sudo: true
 language: java
 script:
   - sudo rm /etc/mavenrc
   - export MAVEN_OPTS="-Xmx2469m -XX:MaxPermSize=512m"
-  - mvn clean install 
-  - mvn clean install -Pwildfly1000
+  - mvn clean install -P wildfly1000
 jdk:
 - oraclejdk8
-sudo: true
-
 branches:
   only:
   - master
