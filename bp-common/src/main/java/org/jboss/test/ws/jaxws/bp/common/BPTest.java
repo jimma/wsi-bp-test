@@ -83,9 +83,9 @@ public abstract class BPTest extends JBossWSTest
    }
    
    
-	protected String getBSPProxyBaseURL(URL baseURL) {
-		String port = String.valueOf(baseURL.getPort());
-		return baseURL.toString().replaceFirst(port, this.PROXY_PORT);
-	}
+   protected String getBSPProxyBaseURL(URL baseURL) {
+      String port = String.valueOf(baseURL.getPort());
+      return baseURL.toString().replaceFirst(port, this.PROXY_PORT);
+   }
    
 }
