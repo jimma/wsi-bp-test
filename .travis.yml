@@ -1,9 +1,8 @@
 language: java
 jdk:
 - oraclejdk8
-script: 
-  - mvn clean
-  - mvn clean
+install: false
+script: "mvn clean install -P wildfly1000 -DskipTests=true"
 notifications:
 email:
 recipients:
