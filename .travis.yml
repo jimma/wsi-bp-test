@@ -1,11 +1,13 @@
 language: java
 jdk:
-- oraclejdk8
-before_install: 
-  - wget https://repository.jboss.org/nexus/content/repositories/public/org/wildfly/wildfly-dist/10.0.0.CR2/wildfly-dist-10.0.0.CR2.zip
-  - unzip wildfly-dist-10.0.0.CR2.zip
-install: "mvn clean -P wildfly1000 --settings .travis.maven-settings.xml"
-script: "mvn clean install -P wildfly1000 --settings .travis.maven-settings.xml -Djboss.home=$TRAVIS_BUILD_DIR/wildfly-10.0.0.CR2"
+ - oraclejdk8
+env:
+  - WILDFLY1000=10.0.0.CR2
+install: 
+  - wget https://repository.jboss.org/nexus/content/repositories/public/org/wildfly/wildfly-dist/${WILDFLY1000}/wildfly-dist-${WILDFLY1000}.zip 
+  - unzip wildfly-dist-${WILDFLY1000}.zip
+script: 
+  - mvn clean install -P wildfly1000 --settings .travis.maven-settings.xml -Djboss.home=$TRAVIS_BUILD_DIR/wildfly-${WILDFLY1000}
 notifications:
 email:
 recipients:
