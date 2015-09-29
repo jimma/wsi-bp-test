@@ -1,8 +1,8 @@
 language: java
 jdk:
 - oraclejdk8
-install: "mvn clean -P wildfly1000"
-script: "mvn clean install -P wildfly1000 -DskipTests=true"
+install: "mvn clean -P wildfly1000 --settings .travis.maven-settings.xml"
+script: "mvn clean install -P wildfly1000 -DskipTests=true --settings .travis.maven-settings.xml"
 notifications:
 email:
 recipients:
