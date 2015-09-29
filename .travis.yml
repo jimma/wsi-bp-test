@@ -5,7 +5,7 @@ before_install:
   - wget https://repository.jboss.org/nexus/content/repositories/public/org/wildfly/wildfly-dist/10.0.0.CR2/wildfly-dist-10.0.0.CR2.zip
   - unzip wildfly-dist-10.0.0.CR2.zip
 install: "mvn clean -P wildfly1000 --settings .travis.maven-settings.xml"
-script: "mvn clean install -P wildfly1000 --settings .travis.maven-settings.xml -Djboss.home=./wildfly-10.0.0.CR2"
+script: "mvn clean install -P wildfly1000 --settings .travis.maven-settings.xml -Djboss.home=$TRAVIS_BUILD_DIR/wildfly-10.0.0.CR2"
 notifications:
 email:
 recipients:
