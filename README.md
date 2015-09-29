@@ -1,4 +1,5 @@
 # WS-I Basic Profile Tests
+[![Build Status](https://travis-ci.org/jimma/wsi-bp-test.svg?branch=master)](https://travis-ci.org/jimma/wsi-bp-test)
 * Run these tests
   
   Go to each module and run with
