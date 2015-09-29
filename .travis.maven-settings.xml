@@ -2,9 +2,23 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <mirrors>
+    <mirror>
+      <mirrorOf>central</mirrorOf>
+      <name>JBoss.org Developer Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/developer/</url>
+      <id>jboss-developer-repository-group</id>
+    </mirror>
+    <mirror>
+      <mirrorOf>central</mirrorOf>
+      <name>JBoss.org Developer Repository snapshot</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+      <id>jboss-snapshot</id>
+    </mirror>
+  </mirrors>
     <profiles>
         <profile>
-            <id>jboss</id>
+        <id>jboss</id>
         <repositories>  
         <repository>  
           <id>jboss-public-repository-group</id>  
