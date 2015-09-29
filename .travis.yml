@@ -1,11 +1,12 @@
----
 language: java
-script: "mvn clean install -P wildfly1000 -DskipTests=true"
 jdk:
 - oraclejdk8
-branches:
-  only:
-  - master
+env:
+matrix:
+- SLF4J_VERSION=1.7.12
+- SLF4J_VERSION=1.6.6
+script: "mvn clean install -P wildfly1000 -DskipTests=true"
 notifications:
-  email:
-  - mail2jimma@gmail.com
+email:
+recipients:
+- mail2jimma@gmail.com
