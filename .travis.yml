@@ -10,8 +10,7 @@ script:
   - mvn clean install -P wildfly1000 --settings .travis.maven-settings.xml -Djboss.home=$TRAVIS_BUILD_DIR/wildfly-${WILDFLY1000}
 notifications:
 email:
-recipients:
-- mail2jimma@gmail.com
+  - mail2jimma@gmail.com
 cache:
  directories:
  - $HOME/.m2
