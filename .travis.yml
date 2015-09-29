@@ -12,3 +12,6 @@ notifications:
 email:
 recipients:
 - mail2jimma@gmail.com
+cache:
+ directories:
+ - $HOME/.m2
