@@ -8,8 +8,11 @@ install:
   - unzip wildfly-dist-${WILDFLY1000}.zip
 script: 
   - mvn clean install -P wildfly1000 --settings .travis.maven-settings.xml -Djboss.home=$TRAVIS_BUILD_DIR/wildfly-${WILDFLY1000}
+branches:
+  only:
+  - master
 notifications:
-email:
+  email:
   - mail2jimma@gmail.com
 cache:
  directories:
